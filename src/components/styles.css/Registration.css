@@ -1,0 +1,120 @@
+.reg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}
+.regitrBody{
+    width: 100%;
+    height: 100%;
+}
+
+.form{
+    width: 119vh;
+    display: flex;
+    justify-content: space-between;
+    height: 69vh;
+    margin: 100px auto; 
+    box-shadow: 0px 4px 10px 5px #b8afaf;
+}
+
+
+.reg2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 50vh;
+    background-color: aliceblue;
+
+}
+
+
+input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2vh;
+    font-size: 15px;
+
+    outline: none;
+    padding: 0 10px;
+    height: 30px;
+    width: 300px;
+    
+}
+
+label{
+    margin-left: 12px;
+    font-size: 18px;
+    font-weight: bold;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    rgb(10, 10, 10);
+}
+
+.nameLast{
+    display: flex;
+}
+.inp{
+    width: 120px;
+}
+
+button{
+    height: 5vh;
+    width: 25vh;
+    color: antiquewhite;
+    font-size: 18px;
+    border:none;
+    background-color:#0B0047 ;
+   
+}
+
+
+.header {
+    width: 49vh;
+    display: flex;
+}
+.header a {
+    margin-right: 20px;
+    font-size: 22px;
+  
+    color: #0B0047;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.header a:hover {
+    border-bottom: #32328f 2px solid;
+    transition: 5;
+    
+}
+
+.info{
+    width: 300px;
+    display: flex;
+}
+
+.trush{
+   text-decoration: none;
+   font-size: 12px;
+  
+}
+
+.creators{
+    margin-top: 12px;
+    width: 220px
+}
+
+
+.range{
+    width: 30px;
+}

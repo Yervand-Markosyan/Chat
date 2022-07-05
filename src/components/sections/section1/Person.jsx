@@ -5,19 +5,20 @@ class Person extends React.Component{
         super(props)
         this.props = props
         this.state = {
-           online : props.online,
+           online: props.online,
            date: props.date,
            name: props.name,
            lastname: props.lastname,
            lastmessage: props.lastmessage,
            img: props.img,
+        //    people: [] <-- WS folder
         }
     }
 
     
     render(){
         return(
-            <div className="person" key={this.props._id}>
+            <div className="chatInfo" key={this.props._id}>
                  <div className="avatar">
                        <img src={this.props.src} alt='img'></img>
                  </div>

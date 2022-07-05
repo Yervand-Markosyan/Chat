@@ -1,10 +1,16 @@
+body{
+    height: 100%;
+    width: 99%;
+    background-image: url('..//1.jpeg');
+    background-repeat: no-repeat;
+    background-size:50.7% 108%;
+}
 .reg{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: auto;
-    width: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,15 +19,18 @@
 .regitrBody{
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form{
-    width: 119vh;
+    width: 104.3vh;
     display: flex;
     justify-content: space-between;
-    height: 69vh;
-    margin: 100px auto; 
-    box-shadow: 0px 4px 10px 5px #b8afaf;
+    height: 62vh;
+    background: transparent;
+    
 }
 
 
@@ -32,7 +41,7 @@
     align-items: center;
     height: auto;
     width: 50vh;
-    background-color: aliceblue;
+    background-color: transparent
 
 }
 
@@ -43,18 +52,18 @@ input{
     justify-content: center;
     align-items: center;
     margin: 2vh;
-    font-size: 15px;
-
+    font-size: 2vh;
+    cursor: pointer;
     outline: none;
-    padding: 0 10px;
-    height: 30px;
-    width: 300px;
+    padding: 0 1vh;
+    height: 4vh;
+    width: 33vh;
     
 }
 
 label{
-    margin-left: 12px;
-    font-size: 18px;
+    margin-left: 1.6vh;
+    font-size: 1.8vh;
     font-weight: bold;
 }
 ::-webkit-input-placeholder { /* WebKit browsers */
@@ -65,56 +74,34 @@ label{
     display: flex;
 }
 .inp{
-    width: 120px;
+    width: 13vh;
 }
 
 button{
     height: 5vh;
     width: 25vh;
     color: antiquewhite;
-    font-size: 18px;
+    font-size: 2vh;
     border:none;
+    cursor: pointer;
     background-color:#0B0047 ;
-   
-}
-
-
-.header {
-    width: 49vh;
-    display: flex;
-}
-.header a {
-    margin-right: 20px;
-    font-size: 22px;
-  
-    color: #0B0047;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.header a:hover {
-    border-bottom: #32328f 2px solid;
-    transition: 5;
-    
+    margin-bottom: 2vh;
+    border-radius: 1vh;
 }
 
 .info{
-    width: 300px;
+    width: 35vh;
     display: flex;
+    align-items: center;
 }
 
 .trush{
    text-decoration: none;
-   font-size: 12px;
+   font-size: 1.5vh;
   
-}
-
-.creators{
-    margin-top: 12px;
-    width: 220px
 }
 
 
 .range{
-    width: 30px;
+    width: 4vh;
 }

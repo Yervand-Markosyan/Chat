@@ -1,0 +1,90 @@
+html{
+    background-color: #bfc0c2;
+}
+
+#root{
+   height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.signIn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+  
+  
+}
+
+.inp{
+    margin-bottom: 2vh;
+    font-size: 2vh;
+    outline: none;
+    padding: 0 1vh;
+    height: 3.5vh;
+    width: 31vh;
+    margin-top: 4vh;
+    cursor: pointer;
+}
+
+
+button{
+    height: 4vh;
+    width: 27vh;
+    margin-top: 1.5vh;
+    background-color:#0e3b5a ;
+    border: none;
+    color: antiquewhite;
+    cursor: pointer;
+    font-size: 75%;
+}
+
+
+
+h2{
+    font-weight: bold;
+}
+p{
+    margin-top: 0.5vh;
+    margin-bottom: 0.8vh;
+}
+.form{
+    width: 42em;
+    display: flex;
+    justify-content: space-between;
+    height: 75vh;
+    box-shadow: 0px 4px 10px 5px #969494;
+    background-color:rgb(164, 184, 187) ;
+    padding: 0;
+}
+.reg{
+    
+    height:auto ;
+    width: 20em;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: inset 4px 0 20px black;
+}
+
+
+.check{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+}
+.me{
+    font-size: 2vh;
+    margin-left: 0.5vh;
+   
+}
+.box{
+    width: 2.2vh;
+    height: 2.2vh;
+    cursor: pointer;
+}

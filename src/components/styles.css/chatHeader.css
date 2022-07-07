@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.Cheader {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1d2437;
+    color: whitesmoke;
+    width: 100%;
+    height: 2.8em;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.aboutStyle {
+    padding: 1vh;
+    margin: 0.5em;
+    font-family: cursive;
+}
+
+.thisPerson {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-right: 1vh;
+}
+
+.thisFullName {
+    font-family: serif;
+}
+
+.thisImg {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+}
+
+.online {
+    background-color: rgb(23, 243, 23);
+}
+
+.headerLogo {
+    padding: 1vh;
+    margin: 0.5em;
+}
+
+.material-icons {
+    font-size: 1.2em;
+    color: white;
+}
+
+.newMess {
+    position: absolute;
+    background-color: rgb(255, 0, 0);
+}
+
+.dropSleck,
+.aboutStyle,
+.thisImg {
+    cursor: pointer;
+}
+
+.material-icons,
+.thisFullName,
+.dropSleck {
+    padding: 0.2em;
+    margin: 0.2em;
+
+}
+
+.material-icons,
+.thisImg {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.online,
+.newMess {
+    height: 0.5em;
+    width: 0.5em;
+    border-radius: 50%;
+}
+
+.headerLogo,
+.material-icons,
+.thisFullName,
+.dropSleck,
+.aboutStyle {
+    background-color: #3b4358;
+    border-radius: 0.3em;
+}

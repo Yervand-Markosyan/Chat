@@ -1,0 +1,63 @@
+.chatInfo {
+  margin: 0.4em;
+  width: 95%;
+  background-color: #1d2437;
+  border-radius: 0.3em;
+  box-shadow: 0.02em 0.01em 0.13em inset #e7d6d6;
+  cursor: pointer;
+}
+.avatar {
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+.personAbout {
+  display: flex;
+  padding: 0.2em;
+}
+.fullName {
+  color: antiquewhite;
+  font-size: 1em;
+}
+.lastMess {
+  justify-content: space-around;
+  color: rgb(145, 145, 137);
+}
+.lastMessage{
+  color: antiquewhite;
+}
+.lastMessDate{
+  font-size: 0.7em;
+
+}
+.name_mess {
+  margin-left: 0.8em;
+}
+.status {
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 0.36em;
+  color: rgb(145, 145, 137);
+}
+.ofline {
+  background-color: rgb(197, 102, 102);
+  margin-right: 0.1em;
+}
+.online {
+  background-color: rgb(26, 196, 54);
+}
+.fullName,.chatInfo{
+    display: flex;
+    justify-content: space-between;
+}
+.online,.ofline{
+    height: 0.5em;
+    width: 0.5em;
+    border-radius: 50%;
+}
+.status,.fullName,.lastMess{
+    display: flex;
+    align-items: center;
+}

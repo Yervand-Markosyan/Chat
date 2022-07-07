@@ -45,9 +45,15 @@ class Section1 extends React.PureComponent {
                     {users.map(user => <Person user={user}/>)} */}
             
             {/* Group-ները փոխել Person-ի լոգիկայով */}
-              <Group />
-              <Group />
-              <Group />
+       <div className="personZona">
+             <Person/>
+              <Person/>
+              <Person/>
+              <Person/>
+              <Person/>
+              <Person/>
+
+       </div>
             </div>
           </div>
           <hr />

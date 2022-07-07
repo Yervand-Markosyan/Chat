@@ -1,18 +1,19 @@
 * {
     margin: 0;
-    padding: 2px;
+    padding: 0;
     font-family: 'Abel', sans-serif;
     font-size: 22px;
     /* height: 99%; */
 }
 
 html {
-    height: 98%;
-    width: 98%;
+    height: 100%;
+    width: 100%;
+    background-color:#2a354e ;
 }
 
 body {
-    width: 99%;
+    width: 100%;
     height: 100%;
 }
 
@@ -22,17 +23,13 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 5px;
+    margin: 20px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
+    scroll-margin-block: .10em;
     background: grey;
-    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

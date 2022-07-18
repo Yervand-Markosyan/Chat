@@ -1,0 +1,139 @@
+.section2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* min-width: 40%; */
+    width: 80%;
+    height: 90.1vh;
+    border-left: 1px solid #111520;
+    border-right: 1px solid #111520;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    min-height: 12%;
+    background-color: #111520;
+    box-shadow: 0 0 5px black;
+    margin-top: 20px;
+    z-index: 1;
+}
+
+.leftSide {
+    display: flex;
+    align-items: center;
+    min-width: 35%;
+    margin: 15px;
+    cursor: pointer;
+}
+
+.pic {
+    width: 40px;
+    height: 40px;
+    margin-right: 1em;
+    border-radius: 2em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.textArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 6vh;
+}
+
+h6 {
+    font-size: 0.8em;
+    color: white;
+    margin: 0;
+}
+
+.online1 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.online1 > p {
+    margin: 0;
+}
+
+p {
+    margin-right: 0.25em;
+    font-size: 0.8em;
+    color: grey;
+}
+
+.name_mess>div>p {
+    margin: 0.5vh;
+}
+
+.round {
+    width: 8px;
+    height: 8px;
+    background-color: green;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.rightSide {
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+    margin-right: 1em;
+}
+
+.button {
+    height: 1.1em;
+}
+
+.messagePlace {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #111520;
+    border-radius: 3px;
+    width: 90%;
+    min-height: 7%;
+    padding: 0 0.5em;
+}
+
+.messagePlace>p {
+    font-size: 1em;
+    color: rgb(0, 133, 104);
+}
+
+.messagePlace>textarea {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: auto;
+    width: 80%;
+    height: 3vh;
+    font-size: 2.2vh;
+    color: white;
+    /* border: 1px solid red; */
+}
+
+.send {
+    width: 0.9em;
+    height: 0.9em;
+}
+
+.showMessages {
+    width: 100%;
+    height: 70%;
+}
+
+.smile {
+    width: 1em;
+    height: 1em;
+}

@@ -1,11 +1,19 @@
 import React from 'react'
-// import Reg from './components/Registration'
-import Reg from './components/SignIn'
-// import Reg from './components/sections/section1/Section1'
+import SignUp from './components/SignUp'
+import SignIn from './components/SignIn'
+import Chat from './components/Chat'
+import {BrowserRouter, Routes, Route}  from 'react-router-dom'
 
 function App() {
   return (
-    <Reg/>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<SignIn />} />
+        <Route path='/auth/signup' element={<SignUp />} />
+        <Route path='/chat' element={<Chat />} />
+        {/* <Route element={Error} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,12 @@
+.chat{
+    display: flex;
+    flex-direction: column;
+    background-color: #1d2437;
+    height: 100%;
+}
+
+.sections{
+    display: flex;
+    color: white;
+    height: 90%;
+}

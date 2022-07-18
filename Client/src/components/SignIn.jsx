@@ -1,7 +1,7 @@
 import React  from "react";
 import Fetch from "..//JS/services/fetch";
 import { Link } from "react-router-dom";
-import "./styles.css/singin.css";
+import "./styles.css/SignIn.css";
 
 class SignIn extends React.PureComponent {
   constructor() {
@@ -25,10 +25,9 @@ class SignIn extends React.PureComponent {
         password: this.state.password
       }
       Fetch.post("auth/signin", signInInfo).then(data => {
-        console.log(data);
-        // localStorage.setItem("thisUserAbout", data.thisUserAbout)
-        // window.location.href = "http://localhost:3000/chat"
-        console.log(data);
+        localStorage.setItem("thisUserAbout", JSON.stringify(data.thisUserAbout))
+        localStorage.setItem("token", JSON.stringify(data.token))
+        window.location.href = "http://localhost:3000/chat"
       }).then(res => {
         console.log(res);
       })

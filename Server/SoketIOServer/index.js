@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const SECRET = require("..//HttpServer/secrets/config")
+const {Origin_URL} = require("./secrets/config")
 
 const io = require("socket.io")(8900, {
   cors: {
-    origin: "http://localhost:3040",
+    origin: Origin_URL,
   },
 });
 const starting = ()=>{
-  console.log("Soket.IO server starting on port... >  3040");
+  console.log("Soket.IO server is started...");
 }
 
 let users = [];

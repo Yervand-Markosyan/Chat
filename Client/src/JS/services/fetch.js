@@ -35,7 +35,7 @@ class Fetch {
       xhr.open(method, url);
       xhr.responseType = "json";
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      xhr.setRequestHeader("authorization", `Bearer ${localStorage.getItem('token')}`);
+      xhr.setRequestHeader("authorization", `Bearer ${JSON.parse(localStorage.getItem('token'))?JSON.parse(localStorage.getItem('token')).token:""}`);
       xhr.onload = () => {xhr.status >= 400 ? reject("not found") : resolve(xhr.response)};
       xhr.send(JSON.stringify(body));
     });

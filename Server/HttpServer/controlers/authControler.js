@@ -59,7 +59,11 @@ class authControler {
           contacts: user.contacts,
           thisUser_id:user._id
         }
-        res.json({ token, expiresIn: "240s", thisUserAbout });
+        res.json({ 
+          token:{
+            token,
+             expiresIn: "240s"},
+          thisUserAbout });
       } else {
         return res
           .status(401)
@@ -74,7 +78,11 @@ class authControler {
       const reqToken = req.headers.authorization.split(" ")[1];
       const decodeData = jwt.verify(reqToken, Secret.secret);
       const token = generateAccesToken(decodeData.email, decodeData.roles);
-      res.json({ token, expiresIn: "240s" });
+      res.json({ 
+        token:{
+        token,
+         expiresIn: "240s"}, });
+      // res.json("")
     } catch (e) {
       console.log(e);
       return res.status(404).json({ massage: "miban sxal es are" });

@@ -6,9 +6,9 @@ const multer = require('multer')
 const path = require('path')
 const fs = require("fs")
 // routers
-const routerClient = require("./roters/authRouter");
-const routerAdmin = require("./roters/adminRouter");
-const routerMessages = require("./roters/messengerRouter");
+const routerClient = require("./routers/authRouter");
+const routerAdmin = require("./routers/adminRouter");
+const routerMessages = require("./routers/messengerRouter");
 // secret
 const SECRET = require("./secrets/config");
 // ws
@@ -96,7 +96,7 @@ async function startAPP() {
       .catch(() => console.log("DB is not conected see your Node"));
 
     app.listen(PORT, () => {
-      console.log(`server starting on port... >  ${PORT}`);
+      console.log(`HttpServer is started... `);
     });
   } catch (e) {
     console.log(e);

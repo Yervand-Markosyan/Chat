@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
     if (!token) {
       return res.status(403).json({ massage: "User is not registred" });
     }
-    const decodedData = jwt.verify(token, Secret.secret);
+    const decodedData = jwt.verify(token, SECRET.secret);
     req.user = decodedData;
     next();
   } catch (e) {

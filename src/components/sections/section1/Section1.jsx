@@ -36,18 +36,18 @@ class Section1 extends React.PureComponent {
           <NewChat />
         </div>
 
-        <div className='twoChatZone'>
+        <div className="twoChatZone">
           <div className="border">
             <p>Persons</p>
             <div className="zone">
-              {/* Գենեռացվող */}
-              {/* {sessionStorage.map(user => <Person user={user}/>)}
-                    {users.map(user => <Person user={user}/>)} */}
-            
-            {/* Group-ները փոխել Person-ի լոգիկայով */}
-              <Group />
-              <Group />
-              <Group />
+              <div className="personZone">
+                <Person />
+                <Person />
+                <Person />
+                <Person />
+                <Person />
+                <Person />
+              </div>
             </div>
           </div>
           <hr />
@@ -55,6 +55,9 @@ class Section1 extends React.PureComponent {
             <p>Groups</p>
             <div className="zone">
               {/* Գենեռացվող */}
+              <Group />
+              <Group />
+              <Group />
               <Group />
             </div>
           </div>

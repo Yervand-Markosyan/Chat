@@ -5,40 +5,28 @@ class Fetch {
   constructor(url) {
     this.url = url;
   }
-  async get(path) {
+  get(path) {
     const url = `${this.url}/${path}`;
-    const data = await this.request("GET", url);
-    if (data.token) {
-      localStorage.removeItem('token');
-      localStorage.setItem('token', data.token )
-    }
+    return this.request("GET", url);
   }
 
-  async put(path, body) {
+  put(path, body) {
     const url = `${this.url}/${path}`;
-    const data = await this.request("PUT", url, body);
-    if (data.token) {
-      localStorage.removeItem('token');
-      localStorage.setItem('token', data.token );
-    }
+    return this.request("PUT", url, body);
   }
 
-  async post(path, body) {
+ post(path, body) {
     const url = `${this.url}/${path}`;
-    const data = await this.request("POST", url, body);
-    if (data.token) {
-      localStorage.removeItem('token');
-      localStorage.setItem('token', data.token )
-    }
+    return this.request("POST", url, body);
   }
 
-  async delete(path, body) {
+  delete(path, body) {
     const url = `${this.url}/${path}`;
-    const data = await this.request("DELETE", url, body);
-    if (data.token) {
-      localStorage.removeItem('token');
-      localStorage.setItem('token', data.token )
-    }
+    return this.request("DELETE", url, body);
+  }
+
+  refreshToke(){
+    
   }
 
   request(method, url, body) {

@@ -17,7 +17,7 @@ class Group extends React.Component {
 
   render() {
     return (
-      <div className="chatInfo" key={this.props._id}>
+      <div className="groupInfo" key={this.props._id}>
         <div className="avatar">
           <img src={this.props.src} alt="img"></img>
         </div>

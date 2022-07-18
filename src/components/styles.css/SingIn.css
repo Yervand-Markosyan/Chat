@@ -1,89 +1,97 @@
-html{
-    background-color: #bfc0c2;
+.signinBody {
+    background-color:  #111520;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #189AB4;
 }
 
-#root{
-   height: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.signinForm {
+    width: 28em;
+    height: 72vh;
+    background-color: #1d2437;
+    -webkit-box-shadow: 0px 0px 50px 9px #189AB4; 
+    box-shadow: 0px 0px 50px 9px #189AB4;
+    border-radius: 0.9em;
+    padding: 0;
 }
 
-.signIn{
+.signIn {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
     height: 100%;
-  
-  
 }
 
-.inp{
-    margin-bottom: 2vh;
+.inp2 {
+    margin: 1em;
     font-size: 2vh;
     outline: none;
     padding: 0 1vh;
     height: 3.5vh;
     width: 31vh;
-    margin-top: 4vh;
+    /* margin-top: 4vh; */
     cursor: pointer;
 }
 
-
-button{
+.signIn >button,#linkSignUp {
     height: 4vh;
     width: 27vh;
     margin-top: 1.5vh;
-    background-color:#0e3b5a ;
+    background-color: #189AB4;
     border: none;
     color: antiquewhite;
     cursor: pointer;
-    font-size: 75%;
+    font-weight: 600;
+    font-size: 1.5em;
+    border-radius: 1vh;
+}
+#linkSignUp{
+    display: flex;
+    justify-content: center;
+    text-decoration-line: none;
 }
 
 
-
-h2{
+.signIn >h2 {
     font-weight: bold;
+    font-size: 4em;
+    margin: 0;
 }
-p{
+
+.signIn > p {
     margin-top: 0.5vh;
     margin-bottom: 0.8vh;
+    font-size: 1.3em;
 }
-.form{
-    width: 42em;
-    display: flex;
-    justify-content: space-between;
-    height: 75vh;
-    box-shadow: 0px 4px 10px 5px #969494;
-    background-color:rgb(164, 184, 187) ;
-    padding: 0;
-}
-.reg{
-    
-    height:auto ;
+
+.reg {
+
+    height: auto;
     width: 20em;
-    background-position:center;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: inset 4px 0 20px black;
 }
 
 
-.check{
+.check {
     display: flex;
     align-items: center;
     justify-content: start;
 
 }
-.me{
+
+.me {
     font-size: 2vh;
     margin-left: 0.5vh;
-   
+
 }
-.box{
+
+.box {
     width: 2.2vh;
     height: 2.2vh;
     cursor: pointer;

@@ -48,6 +48,7 @@ class authControler {
     }
   }
   async signIn(req, res) {
+    console.log(6546469)
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email:email });

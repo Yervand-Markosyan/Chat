@@ -23,7 +23,7 @@ const upload =  multer({ dest: path.join(__dirname, '.') })
 
 const PORT = SECRET.PORT || "3033";
 const app = express();
-
+app.get("/",(r,e)=> console.log(46546))
 app.use(cors());
 app.use(express.json());
 app.use("/auth", routerClient);

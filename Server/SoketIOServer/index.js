@@ -1,8 +1,16 @@
+// libs
 const mongoose = require("mongoose");
+const fs = require("fs")
+const multer = require('multer')
+const path = require('path')
+//secrets
 const SECRET = require("..//HttpServer/secrets/config")
 const {Origin_URL} = require("./secrets/config")
+//models
+const GridFile = require("..//HttpServer/models/filesSchame")
 
-const io = require("socket.io")(8900, {
+
+const io = require("socket.io")({
   cors: {
     origin: Origin_URL,
   },
@@ -29,6 +37,7 @@ const getUser = (userId) => {
 io.on("connection", (socket) => {
   //when ceonnect
   console.log("a user connected.");
+  console.log(users);
 
   
   //take userId and socketId from user
@@ -40,6 +49,15 @@ io.on("connection", (socket) => {
   
   //send and get message
   socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+    const user = getUser(receiverId);
+    io.to(user.socketId).emit("getMessage", {
+      senderId,
+      text,
+    });
+  });
+
+   //send and get file
+   socket.on("sendMessage", ({ senderId, receiverId, text }) => {
     const user = getUser(receiverId);
     io.to(user.socketId).emit("getMessage", {
       senderId,
@@ -69,6 +87,7 @@ io.on("connection", (socket) => {
 });
  
 try {
+  io.listen(3040)
   starting();
   mongoose
     .connect(SECRET.MONGO_URL, {

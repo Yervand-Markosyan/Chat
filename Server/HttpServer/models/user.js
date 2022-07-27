@@ -36,10 +36,22 @@ const usersSchame = new mongoose.Schema({
       default:""
     },
     socialNetworks:{
-      type:Array,
-      default:[]
+      fb:{
+        type:String,
+        default:"FaceBook.com"
+      },
+      instagran:{
+        type:String,
+        default:"Instagran.com"
+      },
+      linkedin:{
+        type:String,
+        default:"Linkedin.com"
+      },
+      type:Object,
+      
     },
-    type:Array,
+    type:Object,
   },
   roles: {
     type: String,

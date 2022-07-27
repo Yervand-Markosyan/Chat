@@ -11,19 +11,15 @@ const routerAdmin = require("./routers/adminRouter");
 const routerMessages = require("./routers/messengerRouter");
 // secret
 const SECRET = require("./secrets/config");
-// ws
-        // const WEBSOCKET = require("./webSocket");
 //db
 const GridFile = require("./models/filesSchame");
 const Users = require("./models/user")
 ////middleWare
-const upload =  multer({ dest: path.join(__dirname, '.') })
-
-
+const upload = multer({ dest: path.join(__dirname, '.') })
 
 const PORT = SECRET.PORT || "3033";
 const app = express();
-app.get("/",(r,e)=> console.log(46546))
+app.get("/", (r, e) => console.log(46546))
 app.use(cors());
 app.use(express.json());
 app.use("/auth", routerClient);
@@ -32,33 +28,26 @@ app.use("/chat", routerMessages);
 
 app.post('/chatpx/filefromclient', upload.any(), async (req, res, nxt) => {
   try {
+    console.log(req.files)
     // uploaded file are accessible as req.files
     if (req.files) {
+      // console.log(req)
       const promises = req.files.map(async (file) => {
         const fileStream = fs.createReadStream(file.path)
-
         // upload file to gridfs
         const gridFile = new GridFile({ filename: file.originalname })
         await gridFile.upload(fileStream)
-  
+        console.log(gridFile)
         // delete the file from local folder
         fs.unlinkSync(file.path)
-        const  data = await GridFile.find({gridFile})
-        const info = data[data.length-1]
-         console.log(SECRET.serverUrl + info._id +"/"+ info.filename);
-        // update user img
-        if (req.body.user_id) {
-          const  data = await GridFile.find({gridFile})
-          const info = data[data.length-1]
-          const userUpdate = await Users.findOneAndUpdate({_id:req.body.user_id},{img:SECRET.serverUrl + info._id +"/"+ info.filename})
-          userUpdate.save()
-        }
+        const data = await GridFile.find({ gridFile })
+        const info = data[data.length - 1]
+        console.log(SECRET.serverUrl + info._id + "/" + info.filename);
+
       })
-
       await Promise.all(promises)
+      res.sendStatus(201).json(SECRET.serverUrl + info._id + "/" + info.filename)
     }
-
-    res.sendStatus(201)
   } catch (err) {
     nxt(err)
   }
@@ -82,11 +71,8 @@ app.get('/chatpx/files/:id/:name', async (req, res, nxt) => {
   }
 })
 
-
-
 async function startAPP() {
   try {
-    // WEBSOCKET();
     mongoose
       .connect(SECRET.MONGO_URL, {
         useUnifiedTopology: true,

@@ -28,31 +28,6 @@ class MessageControlre {
       res.status(500).json("conversation not found");
     }
   }
-  async Allinfo(req, res) {
-    try {
-      const users = await User.find({});
-      const obj = {}
-      const allUsers = {}
-      users.map((item) => {
-        const item_id = item._id
-       allUsers[item_id] = {
-          fullname : item.name +" "+ item.lastname,
-          imgs : item.imgs,
-          contacts: item.contacts,
-          companion_id : item._id,
-        }
-      });
-      obj.allUsers = allUsers
-
-      const conversation = await ConversationSchame.find({
-        members: { $in: [req.body.thisUserId] },
-      });
-      obj.conversations = conversation
-      res.json(obj);
-    } catch (error) {
-      res.status(500).json("connection error");
-    }
-  }
   async aboutConvers(req, res) {
     try {
       const genData = {};

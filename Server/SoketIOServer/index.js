@@ -1,20 +1,16 @@
 // libs
-const mongoose = require("mongoose");
-const fs = require("fs")
-const multer = require('multer')
-const path = require('path')
+const FormData = require('form-data');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 //secrets
-const SECRET = require("..//HttpServer/secrets/config")
-const { Origin_URL, PORT , Origin_URL2} = require("./secrets/config")
-//models
-const GridFile = require("..//HttpServer/models/filesSchame")
-const conversationSchame = require("..//HttpServer/models/ConversationSchame")
-const MessageSchame = require("..//HttpServer/models/MessageSchame");
-const upload = multer({ dest: path.join(__dirname, '.') })
+const { Origin_URL, PORT, } = require("./secrets_io/config")
+/// servis
+const Fetch = require("./FetchServis/fetch")
+
 const io = require("socket.io")({
   cors: {
-    origin: [Origin_URL,Origin_URL2]
+    origin: [Origin_URL]
   },
+  maxHttpBufferSize: 1e8 // 100 MB
 });
 const starting = () => {
   io.listen(PORT)
@@ -25,8 +21,7 @@ let users = [];
 
 const addUser = (userId, socketId) => {
   !users.some((user) => user.userId === userId) &&
-    users.push({ userId, socketId });
-    console.log("user++")
+    users.push({ userId , socketId, });
 };
 
 const removeUser = (socketId) => {
@@ -34,99 +29,62 @@ const removeUser = (socketId) => {
 };
 
 const getUser = (userId) => {
-  // console.log(users.find((user) => user.userId.userId === userId))
-  return users.find((user) => user.userId.userId  === userId);
+  return users.find((user) => user.userId === userId);
 };
 
 io.on("connection", (socket) => {
   //when ceonnect
-  console.log("a user connected.",5464);
+  // console.log("a user connected.",5464);
+
+  socket.emit("me", socket.id)
 
   //take userId and socketId from user
-  socket.on("addUser", (userId, conversationId) => {
-    addUser(userId, socket.id, conversationId);
+  socket.on("addUser", (userId) => {
+    addUser(userId.userId, socket.id);
     io.emit("getUsers", users);
-    // console.log(users)
+    // console.log(users) online users
   });
 
   //send and get message
-  socket.on("sendMessage", async ({conversationId, senderId, receiverId, mess }) => {
-       const  message = {
-        // conversationId,
-        senderId,
-        message:mess,
-        // date: {
-        //   hours: new Date().getHours(),
-        //   minutes: new Date().getMinutes(),
-        //   secnds: new Date().getSeconds(),
-        //   weekday: new Date().getDay(),
-        //   day: new Date().getDate(),
-        //   month: new Date().getMonth() + 1,
-        //   year: new Date().getYear() - 100,
-        // }
-       }
-      //  console.log(message)
-      //  const savedmess =  new MessageSchame(message)
-      //  console.log(savedmess)
-      //  const saved = await savedmess.save()
-    const user = getUser(receiverId);
-    const user2 = getUser(senderId);
-    // console.log(receiverId,senderId)
-    console.log(user.socketId)
-    io.to(user.socketId).emit("getMessage",message);
-    // io.to(user2.socketId).emit("getMessage", message);    ///esi khanes
-
-  });
-
-  //send and get file
-  socket.on("sendFile", upload.any(), async ({ files, conversationId, senderId, receiverId }) => {
-    let seved;
-    try {
-      // uploaded file are accessible as req.files
-      if (files) {
-        const promises = files.map(async (file) => {
-          const fileStream = fs.createReadStream(file.path)
-          // upload file to gridfs
-          const gridFile = new GridFile({ filename: file.originalname })
-          await gridFile.upload(fileStream)
-          // delete the file from local folder
-          fs.unlinkSync(file.path)
-          const data = await GridFile.find({ gridFile })
-          const info = data[data.length - 1]
-          console.log(SECRET.serverUrl + info._id + "/" + info.filename);
-          const mess = {
-            conversationId,
-            senderId,
-            message: `${SECRET.serverUrl + info._id + "/" + info.filename}`,
-            date: {
-              minutes: new Date().getMinutes(),
-              hours: new Date().getHours(),
-              secnds: new Date().getSeconds(),
-              weekday: new Date().getDay(),
-              day: new Date().getDate(),
-              month: new Date().getMonth() + 1,
-              year: new Date().getYear() - 100,
-            }
-          }
-          seved = await new MessageSchame(mess)
-          const user = getUser(receiverId);
-          io.to(user.socketId).emit("getMessage", seved);
-        })
-        await Promise.all(promises)
+  socket.on("sendMessage", async ({ senderId, message, companionId }) => {
+    const messageForMongo = {
+      conversationId,
+      senderId,
+      message: message,
+      date: {
+        hours: new Date().getHours() + "",
+        minutes: new Date().getMinutes() + "",
+        secnds: new Date().getSeconds() + "",
+        weekday: new Date().getDay() + "",
+        day: new Date().getDate() + "",
+        month: (new Date().getMonth() + 1) + "",
+        year: (new Date().getYear() - 100) + "",
       }
-      res.sendStatus(201)
-    } catch (err) {
-      nxt(err)
-      io.to(user.socketId).emit("getMessage", "message not saved");
     }
+    Fetch.post("chat/sendmessage", messageForMongo)
+      .then(data => {
+        const companion = getUser(companionId);
+        io.to(companion.socketId).emit("getMessage", data)
+        const sender = getuser(senderId)
+        io.to(sender.socketId).emit("getMessage", data)
+      })
+      .catch(e => {
+        const sender = getUser(senderId);
+        io.to(sender.socketId).emit("getMessage", e)
+      })
   });
 
   //video call
-  socket.on('join-room', (conversationId, userId) => {
-    console.log(roomId, "roomid", userId, "userid");
-    socket.join(roomId)
-    socket.to(roomId).broadcast.emit('user-connected', userId)
+  socket.on("disconnect", () => {
+    socket.broadcast.emit("callEnded")
+  })
 
+  socket.on("callUser", (data) => {
+    io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name })
+  })
+
+  socket.on("answerCall", (data) => {
+    io.to(data.to).emit("callAccepted", data.signal)
   })
 
   //when disconnect
@@ -139,14 +97,6 @@ io.on("connection", (socket) => {
 
 try {
   starting();
-  mongoose
-    .connect(SECRET.MONGO_URL, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    })
-    .then(() => console.log("DB is conected... "))
-    .catch(() => console.log("DB is not conected see your Node"));
-
 } catch (e) {
   console.log(e);
 }

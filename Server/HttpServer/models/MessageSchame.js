@@ -14,38 +14,38 @@ const MessageSchame = new mongoose.Schema(
         type:String,
         require: true,
     },
-   //  date:{
-   //      hours:{
-   //          type:Number,
-   //          require: true,
-   //       },
-   //       minutes:{
-   //         type:Number,
-   //         require: true,
-   //      },
-   //       secnds:{
-   //          type:Number,
-   //          require: true,
-   //       },
-   //       weekday:{
-   //          type:Number,
-   //          require: true,
-   //       },
-   //       day:{
-   //          type:Number,
-   //          require: true,
-   //       },
-   //       month:{
-   //          type:Number,
-   //          require: true,
-   //       },
-   //       year:{
-   //          type:Number,
-   //          require: true,
-   //       },
-   //      type:Object,
-   //      require: true,
-   //  }
+    date:{
+        hours:{
+            type:String,
+            require: true,
+         },
+         minutes:{
+           type:String,
+           require: true,
+        },
+         secnds:{
+            type:String,
+            require: true,
+         },
+         weekday:{
+            type:String,
+            require: true,
+         },
+         day:{
+            type:String,
+            require: true,
+         },
+         month:{
+            type:String,
+            require: true,
+         },
+         year:{
+            type:String,
+            require: true,
+         },
+        type:Object,
+        require: true,
+    }
 }
 )
 

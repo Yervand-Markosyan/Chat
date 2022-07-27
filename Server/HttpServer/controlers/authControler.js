@@ -1,7 +1,6 @@
 // libs
 const  bcrypt = require("bcryptjs");
 const  jwt = require("jsonwebtoken");
-const  nodemailer = require("nodemailer");
 const  dotenv = require("dotenv");
 const  { validationResult } = require("express-validator");
 // mongodb
@@ -39,7 +38,13 @@ class authControler {
       const user = new User(req.body);
       const token = generateAccesToken(user.email, user.roles);
       const saved = await user.save();
-      return res.json({ token, expiresIn: "240s" , user_id : saved._id });
+      const thisUserAbout = {
+        fullName: saved.name + saved.lastname,
+        imgs: saved.imgs,
+        contacts: saved.contacts,
+        thisUser_id:saved._id
+      }
+      return res.json({ token, expiresIn: "240s" , thisUserAbout });
     } catch (e) {
       console.log(e);
       res.status(400).json({
@@ -48,7 +53,6 @@ class authControler {
     }
   }
   async signIn(req, res) {
-    console.log(6546469)
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email:email });
@@ -89,26 +93,5 @@ class authControler {
       return res.status(404).json({ massage: "miban sxal es are" });
     }
   }
-  // async forgetPassword(req, res) {
-  //   const body = req.body;
-  //   let testEmailAccount = await nodemailer.createTestAccount();
-
-  //   let transporter = nodemailer.createTransport({
-  //     host: "smtp.yandex.ru",
-  //     port: 587,
-  //     secure: false,
-  //     auth: {
-  //       user: "beauty.team.1@yandex.ru",
-  //       pass: "a171913a",
-  //     },
-  //   });
-
-  //   let result = await transporter.sendMail({
-  //     = require( "beauty.team.1@yandex.ru",
-  //     to: "yer.markosyan@gmail.com",
-  //     subject: "Message = require(Node js",
-  //     text: "This message was sent = require(Node js server.",
-  //     html: "This <i>message</i> was sent = require(<strong>Node js</strong> server.",
-  //   });
   }
 module.exports = new authControler();

@@ -1,28 +1,23 @@
-const authMiddleware = require("../middleware/authMiddleware");
+// libes
 const { Router } = require("express");
+// middleware
+const authMiddleware = require("../middleware/authMiddleware");
+// controler
 const MessengerControler = require("../controlers/MessengerControler");
 
 const router = new Router();
 
 //add Convers
-router.post("/new_convers", MessengerControler.newConversation);
+router.post("/new_convers", authMiddleware, MessengerControler.newConversation);
 
 // get Convers
-router.get("/convers:userid", MessengerControler.getConvById);
-router.get("/aboutuser", MessengerControler.aboutConvers);
-router.post("/allinfo", MessengerControler.Allinfo);
+router.get("/convers:userid", authMiddleware, MessengerControler.getConvById);
+router.get("/aboutuser", authMiddleware, MessengerControler.aboutConvers);
 // add Mess
-router.post("/sendmess", MessengerControler.addMess);
+router.post("/sendmessage", MessengerControler.addMess);
 
 // get mess
-router.get("/mess:coversId", MessengerControler.getConvById);
+router.get("/mess:coversId", authMiddleware, MessengerControler.getConvById);
 
 module.exports = router;
 
-/////////////////////////////////////
-/////////////////////////////////////
-/////////////////////////////////////
-/////////////////////////////////////           chmoranaq midlewarner dneq
-/////////////////////////////////////
-/////////////////////////////////////
-/////////////////////////////////////

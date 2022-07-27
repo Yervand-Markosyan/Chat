@@ -1,21 +1,19 @@
 // libs
-const mongoose = require("mongoose");
-const fs = require("fs")
-const multer = require('multer')
-const path = require('path')
+const FormData = require('form-data');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 //secrets
-const SECRET = require("..//HttpServer/secrets/config")
-const {Origin_URL} = require("./secrets/config")
-//models
-const GridFile = require("..//HttpServer/models/filesSchame")
-
+const { Origin_URL, PORT, } = require("./secrets_io/config")
+/// servis
+const Fetch = require("./FetchServis/fetch")
 
 const io = require("socket.io")({
   cors: {
-    origin: Origin_URL,
+    origin: [Origin_URL]
   },
+  maxHttpBufferSize: 1e8 // 100 MB
 });
-const starting = ()=>{
+const starting = () => {
+  io.listen(PORT)
   console.log("Soket.IO server is started...");
 }
 
@@ -23,7 +21,7 @@ let users = [];
 
 const addUser = (userId, socketId) => {
   !users.some((user) => user.userId === userId) &&
-    users.push({ userId, socketId });
+    users.push({ userId , socketId, });
 };
 
 const removeUser = (socketId) => {
@@ -36,48 +34,59 @@ const getUser = (userId) => {
 
 io.on("connection", (socket) => {
   //when ceonnect
-  console.log("a user connected.");
-  console.log(users);
+  // console.log("a user connected.",5464);
 
-  
+  socket.emit("me", socket.id)
+
   //take userId and socketId from user
-  socket.on("addUser", (userId,roomId) => {
-    addUser(userId, socket.id,roomId);
+  socket.on("addUser", (userId) => {
+    addUser(userId.userId, socket.id);
     io.emit("getUsers", users);
-    console.log(users)
+    // console.log(users) online users
   });
-  
+
   //send and get message
-  socket.on("sendMessage", ({ senderId, receiverId, text }) => {
-    const user = getUser(receiverId);
-    io.to(user.socketId).emit("getMessage", {
+  socket.on("sendMessage", async ({ senderId, message, companionId }) => {
+    const messageForMongo = {
+      conversationId,
       senderId,
-      text,
-    });
+      message: message,
+      date: {
+        hours: new Date().getHours() + "",
+        minutes: new Date().getMinutes() + "",
+        secnds: new Date().getSeconds() + "",
+        weekday: new Date().getDay() + "",
+        day: new Date().getDate() + "",
+        month: (new Date().getMonth() + 1) + "",
+        year: (new Date().getYear() - 100) + "",
+      }
+    }
+    Fetch.post("chat/sendmessage", messageForMongo)
+      .then(data => {
+        const companion = getUser(companionId);
+        io.to(companion.socketId).emit("getMessage", data)
+        const sender = getuser(senderId)
+        io.to(sender.socketId).emit("getMessage", data)
+      })
+      .catch(e => {
+        const sender = getUser(senderId);
+        io.to(sender.socketId).emit("getMessage", e)
+      })
   });
 
-   //send and get file
-   socket.on("sendMessage", ({ senderId, receiverId, text }) => {
-    const user = getUser(receiverId);
-    io.to(user.socketId).emit("getMessage", {
-      senderId,
-      text,
-    });
-  });
-  
   //video call
-  socket.on('join-room', (roomId, userId) => {
-    console.log(roomId,"roomid", userId,"userid");
-    socket.join(roomId)
-    socket.to(roomId).broadcast.emit('user-connected', userId)
-
-    socket.on('disconnect', () => {
-      socket.to(roomId).broadcast.emit('user-disconnected', userId)
-      removeUser(socket.id);
-      io.emit("getUsers", users);
-    })
+  socket.on("disconnect", () => {
+    socket.broadcast.emit("callEnded")
   })
-  
+
+  socket.on("callUser", (data) => {
+    io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name })
+  })
+
+  socket.on("answerCall", (data) => {
+    io.to(data.to).emit("callAccepted", data.signal)
+  })
+
   //when disconnect
   socket.on("disconnect", () => {
     console.log("a user disconnected!");
@@ -85,18 +94,9 @@ io.on("connection", (socket) => {
     io.emit("getUsers", users);
   });
 });
- 
+
 try {
-  io.listen(3040)
   starting();
-  mongoose
-    .connect(SECRET.MONGO_URL, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    })
-    .then(() => console.log("DB is conected... "))
-    .catch(() => console.log("DB is not conected see your Node"));
- 
 } catch (e) {
   console.log(e);
 }

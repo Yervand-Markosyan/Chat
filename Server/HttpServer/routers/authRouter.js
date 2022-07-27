@@ -1,5 +1,7 @@
+// libs
 const { Router } = require("express");
 const { check } = require("express-validator");
+// middleware
 const authMiddleware = require("../middleware/authMiddleware");
 // controler
 const authControler = require("../controlers/authControler")

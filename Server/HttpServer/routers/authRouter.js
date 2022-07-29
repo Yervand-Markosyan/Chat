@@ -21,6 +21,7 @@ router.post(
   authControler.signUp
 );
 router.get("/refreshtoken", authMiddleware, authControler.getToken);
+router.post("/userbyid",authMiddleware, authControler.getUserById)
 router.post("/signin", authControler.signIn);
 
 module.exports = router;

@@ -76,5 +76,26 @@ class MessageControlre {
       res.status(500).json("Message note found");
     }
   }
+  //////// get users for search
+  
+  async getUsersForSearch(req,res){
+    try {
+      const users = await User.find({})
+      const arr = []
+      users.map(user => {
+         arr.push({
+          user_id: user._id,
+          imgs : user.imgs,
+          fullname: user.name + user.lastname
+         })
+      })
+      res.json(arr);
+    } catch (error) {
+      res.status(500).json(" not internet connection ");
+    }
+  }
+  
 }
+
+
 module.exports = new MessageControlre();

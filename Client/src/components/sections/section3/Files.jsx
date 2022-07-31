@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import PersonalinfoOpened from "./PersonalinfoOpened";
+import FilesOpened from "./FilesOpened";
 import "./section3.css";
 
-function Personalinfo() {
+function Filesinfo() {
   const [open, setOpen] = useState(false);
   const [icon, setIcon] = useState("⮝");
 
@@ -13,16 +13,16 @@ function Personalinfo() {
 
   return (
     <>
-      <div className="personalinfo">
-        <div className="personalinfoHeader" onClick={handleClick}>
-          <p>Personal information</p>
+      <div className="filesinfo">
+        <div className="filesHeader" onClick={handleClick}>
+          <p>Files</p>
           <p>{icon}</p>
         </div>
 
-        {open ? <PersonalinfoOpened /> : null}
+        {open ? <FilesOpened /> : null}
       </div>
     </>
   );
 }
 
-export default Personalinfo;
+export default Filesinfo;

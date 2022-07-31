@@ -10,14 +10,7 @@ import Fetch from "..//..//..//JS/services/fetch";
 function PersonalinfoOpened() {
   const [info, setInfo] = useState({});
 
-  useEffect(() => {
-    Fetch.post("chat/allinfo", { thisUserId: "62d436eb48b4766760bb20d4" }).then(
-      data => {
-        setInfo(data.allUsers["62d436eb48b4766760bb20d4"].contacts[0]);
-        console.log(data.allUsers["62d436eb48b4766760bb20d4"].contacts[0]);
-      }
-    );
-  }, []);
+
 
   if (!info.socialNetworks) {
     return (

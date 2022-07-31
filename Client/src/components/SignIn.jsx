@@ -1,72 +1,56 @@
-import React  from "react";
+import React from "react";
 import Fetch from "..//JS/services/fetch";
 import { Link } from "react-router-dom";
-import "./styles.css/SignIn.css";
+import "./styles.css/signin.css";
+import { useState } from "react";
 
-class SignIn extends React.PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
+const SignIn = () => {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
-  changeEmailState = e => {
-    this.setState({ email: e.target.value });
-  };
-  changePasswordState = e => {
-    this.setState({ password: e.target.value });
-  };
-  sendDataSignin = () => {
-    if (this.state.email.length > 4 && this.state.password.length > 4) {
-      const signInInfo = {
-        email: this.state.email,
-        password: this.state.password
-      }
-      Fetch.post("auth/signin", signInInfo).then(data => {
-        localStorage.setItem("thisUserAbout", JSON.stringify(data.thisUserAbout))
-        localStorage.setItem("token", JSON.stringify(data.token))
-        window.location.href = "http://localhost:3000/chat"
-      }).then(res => {
-        console.log(res);
-      })
+  const sendDataSignin = () => {
+    if (email.length > 4 && password.length > 4) {
+      Fetch.post("auth/signin", { email, password }).then(data => {
+        localStorage.setItem("loggedUser_id", JSON.stringify(data.loggedUser_id));
+        localStorage.setItem("token", JSON.stringify(data.token));
+        window.location.href = "/chat";
+      }).catch(e => console.log(e));
     }
   };
-  render() {
-    return (
-      <div className="signinBody">
-        <div className="signinForm">
-          <div className="signIn">
-            <h2>Hello!</h2>
-            <p>Sing into Tour account</p>
 
-            <input
-              className="inp2"
-              type="text"
-              placeholder="Email@.goo"
-              onChange={this.changeEmailState}
-              value={this.state.email}
-            ></input>
+  return (
+    <div className="signinBody">
+      <div className="signinForm">
+        <div className="signIn">
+          <h2>Hello!</h2>
+          <p>Sing into Tour account</p>
 
-            <input
-              className="inp2"
-              type="password"
-              placeholder="Password"
-              onChange={this.changePasswordState}
-              value={this.state.password}
-            ></input>
+          <input
+            className="inp2"
+            type="text"
+            placeholder="Email"
+            onChange={e => setEmail(e.target.value)}
+            value={email}
+          ></input>
 
-            <div className="check">
-              <input className="box" type="checkbox" name="" id="" />
-              <label className="me"> Remember me</label>
-            </div>
-            <button onClick={this.sendDataSignin}>Sign In</button>
-            <Link to="/auth/signup" id="linkSignUp">Create Acaunt</Link>
-          </div>
+          <input
+            className="inp2"
+            type="password"
+            placeholder="Password"
+            onChange={e => setPassword(e.target.value)}
+            value={password}
+          ></input>
+
+          {/* <Link to="chat" > <button disabled={bool} id="signin">Sign In</button> </Link> */}
+          <button onClick={sendDataSignin} id="signin">
+            Sign In
+          </button>
+          <Link to="/auth/signup" id="linkSignUp">
+            Create Acaunt
+          </Link>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 export default SignIn;

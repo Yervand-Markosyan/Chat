@@ -38,13 +38,7 @@ class authControler {
       const user = new User(req.body);
       const token = generateAccesToken(user.email, user.roles);
       const saved = await user.save();
-      const thisUserAbout = {
-        fullName: saved.name + saved.lastname,
-        imgs: saved.imgs,
-        contacts: saved.contacts,
-        thisUser_id:saved._id
-      }
-      return res.json({ token, expiresIn: "240s" , thisUserAbout });
+      return res.json({ token, expiresIn: "240s" , loggedUser_id:saved._id} );
     } catch (e) {
       console.log(e);
       res.status(400).json({
@@ -58,17 +52,11 @@ class authControler {
       const user = await User.findOne({ email:email });
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateAccesToken(user.email, user.roles);
-        const thisUserAbout = {
-          fullName: user.name + user.lastname,
-          imgs: user.imgs,
-          contacts: user.contacts,
-          thisUser_id:user._id
-        }
         res.json({ 
           token:{
             token,
              expiresIn: "240s"},
-          thisUserAbout });
+          loggedUser_id:user._id });
       } else {
         return res
           .status(401)
@@ -93,5 +81,24 @@ class authControler {
       return res.status(404).json({ massage: "miban sxal es are" });
     }
   }
+
+  async getUserById(req,res){
+    try {
+      const user_id = req.body.loggedUser_id
+      const user = await User.findById(user_id)      
+      const data = {
+        fullName: user.name + " " + user.lastname,
+        email: user.email,
+        gender: user.gender,
+        imgs: user.imgs,
+        contacts : user.contacts
+      }
+      res.json(data)
+    } catch (e) {
+      console.log(e);
+      return res.status(404).json({ massage: "user is not found" });
+    }
   }
+  }
+
 module.exports = new authControler();

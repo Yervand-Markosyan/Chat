@@ -3,7 +3,6 @@ import "./styles.css/signup.css";
 import Fetch from "../JS/services/fetch.js";
 import { Link } from "react-router-dom";
 
-
 class SignUp extends React.PureComponent {
   constructor() {
     super();
@@ -108,7 +107,11 @@ class SignUp extends React.PureComponent {
                       imgs: [this.state.img]
                     };
                     console.log(regInfo)
-                    Fetch.post("auth/signup", regInfo);
+                    Fetch.post("auth/signup", regInfo).then(data => {
+                      localStorage.setItem("loggedUser_id",JSON.stringify(data.loggedUser_id))
+                      localStorage.setItem("token",JSON.stringify(data.token))
+                      window.location.href = "http://localhost:3000/chat"
+                    });
                     this.setState({
                       name: "",
                       lastname: "",

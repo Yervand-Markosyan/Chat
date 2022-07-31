@@ -1,4 +1,5 @@
 node_modules
 ADMIN
 secrets
+secrets_io
 .vscode

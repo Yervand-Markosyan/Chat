@@ -12,7 +12,7 @@ router.post("/new_convers", authMiddleware, MessengerControler.newConversation);
 
 // get Convers
 router.post("/conversation_by_user_id", authMiddleware, MessengerControler.getConvById);
-router.get("/aboutuser", authMiddleware, MessengerControler.aboutConvers);
+router.post("/about_companion", authMiddleware, MessengerControler.aboutConvers);
 // add Mess
 router.post("/sendmessage", MessengerControler.addMess);
 // get mess

@@ -87,7 +87,7 @@ class authControler {
       const user_id = req.body.loggedUser_id
       const user = await User.findById(user_id)      
       const data = {
-        fullName: user.name + user.lastname,
+        fullName: user.name + " " + user.lastname,
         email: user.email,
         gender: user.gender,
         imgs: user.imgs,

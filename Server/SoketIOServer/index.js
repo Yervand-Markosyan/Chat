@@ -2,13 +2,13 @@
 const FormData = require('form-data');
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 //secrets
-const { Origin_URL, PORT, } = require("./secrets_io/config")
+const { Origin_URL1, PORT, Origin_URL2} = require("./secrets_io/config")
 /// servis
 const Fetch = require("./FetchServis/fetch")
 
 const io = require("socket.io")({
   cors: {
-    origin: [Origin_URL]
+    origin: [Origin_URL1,Origin_URL2]
   },
   maxHttpBufferSize: 1e8 // 100 MB
 });
@@ -42,7 +42,7 @@ io.on("connection", (socket) => {
   socket.on("addUser", (userId) => {
     addUser(userId.userId, socket.id);
     io.emit("getUsers", users);
-    // console.log(users) online users
+    console.log(users) 
   });
 
   //send and get message
@@ -91,6 +91,7 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("a user disconnected!");
     removeUser(socket.id);
+    console.log(users);
     io.emit("getUsers", users);
   });
 });

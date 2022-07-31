@@ -21,7 +21,7 @@ class MessageControlre {
   async getConvById(req, res) {
     try {
       const conversation = await ConversationSchame.find({
-        members: { $in: [req.body.userId] },
+        members: { $in: [req.body.loggedUser_id] },
       });
       res.json(conversation);
     } catch (error) {
@@ -30,8 +30,8 @@ class MessageControlre {
   }
   async aboutConvers(req, res) {
     try {
-      const genData = {};
-      const userId = req.body.userId;
+      const data = {};
+      const userId = req.body.companion_id;
       const coversId = req.body.coversId;
 
       const aboutUser = await User.find({ _id: userId });
@@ -40,13 +40,14 @@ class MessageControlre {
         conversationId: coversId,
         sender: userId,
       });
-      genData.name = aboutUser[0].name;
-      genData.lastname = aboutUser[0].lastname;
-      genData.img = aboutUser[0].img;
-      genData.online = aboutUser[0].online;
-      genData.lastMessage = lastMess[lastMess.length - 1].message;
-      genData.lastMessageDate = lastMess[lastMess.length - 1].date;
-      res.json(genData);
+      data._id = aboutUser[0]._id
+      data.name = aboutUser[0].name;
+      data.lastname = aboutUser[0].lastname;
+      data.imgs = aboutUser[0].imgs;
+      data.contacts = aboutUser[0].contacts
+      // data.lastMessage = lastMess[lastMess.length - 1].message;
+      // data.lastMessageDate = lastMess[lastMess.length - 1].date;
+      res.json(data);
     } catch (e) {
       console.log(e);
       res.status(500).json("user is not faund");
@@ -86,7 +87,7 @@ class MessageControlre {
          arr.push({
           user_id: user._id,
           imgs : user.imgs,
-          fullname: user.name + user.lastname
+          fullname: user.name + " " + user.lastname
          })
       })
       res.json(arr);

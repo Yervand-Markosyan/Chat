@@ -4,7 +4,7 @@ import fetch from "../../../JS/services/fetch";
 // import socket from "../../../JS/soket_Io_client/Socket";
 import './person.css'
 
-const Person = (props) => {
+export default function Person(props) {
 
   const [data, setData] = useState('')
   const [online, setOnline] = useState(false)
@@ -15,40 +15,34 @@ const Person = (props) => {
   const loggedUser_id = JSON.parse(localStorage.getItem("loggedUser_id"))
   const members = props.props.members
   const companion_id = members.find(id => { if (id !== loggedUser_id) { return id } })
-  // console.log(companion_id);
+  console.log(companion_id);
+  
+  useEffect(() => {
+    fetch.post("chat/about_companion", { companion_id, })
+    .then(data => setData(data))
+    .catch(e => {
+        dispatch({ type: "ADD_ERROR", payload: true })
+        setTimeout(() => {
+          window.location.pathname = "/"
+        }, 2000);
+      })
+  }, [])
 
   useEffect(() => {
-    console.log(5);
-    
-  }, [])
-  
-  // useEffect(() => {
-  //   fetch.post("chat/about_companion", { companion_id, })
-  //   .then(data => setData(data))
-  //   .catch(e => {
-  //       dispatch({ type: "ADD_ERROR", payload: true })
-  //       setTimeout(() => {
-  //         window.location.pathname = "/"
-  //       }, 2000);
-  //     })
-  // }, [])
-
-  // useEffect(() => {
-  //   console.log(5);
-  //   if (data && onlineUsers) {
-  //     let arr = []
-  //     onlineUsers.map(item => arr.push(item.userId))
-  //     arr.includes(data._id) ? setOnline(true) : setOnline(false)
-  //   }
-  // }, [onlineUsers])
+    if (data && onlineUsers) {
+      let arr = []
+      onlineUsers.map(item => arr.push(item.userId))
+      arr.includes(data._id) ? setOnline(true) : setOnline(false)
+    }
+  }, [onlineUsers])
 
   return (
-    <div className="chatInfo" key={props.props._id}>
+    <div className="chatInfo" >
       <div className="personAbout">
         <div className="avatar">
           <img src={data ? data.imgs[0] : ''} alt="pic" className="avatar" />
 
-          <div className={online ? "online" : "offline"}></div>
+          <div className={online ? "online" : "offline"} />
         </div>
         <div className="name_mess">
           <div className="fullName">
@@ -64,5 +58,3 @@ const Person = (props) => {
     </div>
   );
 }
-
-export default Person;

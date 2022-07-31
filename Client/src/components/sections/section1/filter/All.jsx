@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Person from "..//Person";
 import Group from "..//Group";
 import { useSelector } from "react-redux";
@@ -7,10 +7,7 @@ import "..//section1.css";
 function All() {
   const error = false;
   const persons = useSelector(state => state.setConversations.conversations);
-useEffect(() => {
-  console.log(448);
-  
-}, [])
+
   if (error) {
     return "popup error";
   }

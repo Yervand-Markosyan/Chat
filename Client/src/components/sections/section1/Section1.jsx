@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./section1.css";
 import Search from "./Search";
 import OnlyGroups from "./filter/OnlyGroups";
@@ -16,24 +16,21 @@ function Section1() {
   const [openAll, setOpenAll] = useState(true);
 
   const handleChatClick = () => {
-    if (openChat) return;
-    setOpenChat(!openChat)
-    setOpenGroup(openChat)
-    setOpenAll(openChat)
+    setOpenChat(true)
+    setOpenGroup(false)
+    setOpenAll(false)
   };
 
   const handleGroupClick = () => {
-    if (openGroup) return;
-    setOpenChat(openChat)
-    setOpenGroup(!openChat)
-    setOpenAll(openChat)
+    setOpenChat(false)
+    setOpenGroup(true)
+    setOpenAll(false)
   };
 
   const handleAllClick = () => {
-    if (openAll) return;
-    setOpenChat(openChat)
-    setOpenGroup(openChat)
-    setOpenAll(!openChat)
+    setOpenChat(false)
+    setOpenGroup(false)
+    setOpenAll(true)
   };
 
   if (error) {

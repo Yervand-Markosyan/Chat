@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ThisUserMessage from "./ThisUserMessage";
 import OtherUserMessage from "./OtherUserMessage";
 import Time from "..//Time";
@@ -10,12 +10,12 @@ const value =
 let t = true;
 
 function ChatZone() {
-  useEffect = () => {
+  // useEffect = () => {
     // REDAX -> const messages = redax.messages
     // REDAX -> const sendlerId = redax.sendlerId
     // LocalStorage -> const thisUserId = JSON.parse(localStorage.getItem("thisUserAbout")).thisUser_id
     <></>;
-  };
+  // };
 
   return (
     <>

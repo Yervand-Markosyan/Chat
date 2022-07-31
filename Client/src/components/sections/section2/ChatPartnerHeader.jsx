@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./section2.css";
 import camera from "..//..//..//..//src/icons/camera.svg";
 import phone from "..//..//..//..//src/icons/phone.svg";

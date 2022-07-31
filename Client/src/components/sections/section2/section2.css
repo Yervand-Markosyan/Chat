@@ -71,7 +71,7 @@ p {
     color: grey;
 }
 
-.name_mess>div>p {
+.name_mess > div > p {
     margin: 0.5vh;
 }
 
@@ -105,12 +105,12 @@ p {
     padding: 0 0.5em;
 }
 
-.messagePlace>p {
+.messagePlace > p {
     font-size: 1em;
     color: rgb(0, 133, 104);
 }
 
-.messagePlace>textarea {
+.messagePlace > textarea {
     background-color: transparent;
     border: none;
     outline: none;
@@ -129,11 +129,85 @@ p {
 }
 
 .showMessages {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
-    height: 70%;
+    min-height: 70%;
+    overflow: auto;
+    padding: 10px 0;
 }
 
 .smile {
     width: 1em;
     height: 1em;
+}
+
+.thisUserMessage {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.otherUserMessage {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.leftMessage {
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+    max-width: 65%;
+    height: auto;
+    background: rgb(0, 133, 104);
+    border-radius: 10px 10px 0 10px;
+    word-break: break-word;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.rightMessage {
+    display: flex;
+    justify-content: flex-start;
+    width: auto;
+    max-width: 65%;
+    height: auto;
+    background: #111520;
+    border-radius: 10px 10px 10px 0;
+    word-break: break-word;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.messageContent {
+    margin: 10px;
+    color: white;
+}
+
+.thisUserPic {
+    width: 20px;
+    height: 20px;
+    border-radius: 2em;
+    margin-right: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.otherUserPic {
+    width: 20px;
+    height: 20px;
+    border-radius: 2em;
+    margin-left: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.messageTime {
+    margin: 0;
+    margin-top: revert;
 }

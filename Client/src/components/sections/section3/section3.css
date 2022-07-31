@@ -4,8 +4,9 @@
     justify-content: flex-start;
     align-items: center;
     width: 30%;
-    height: 100%;
-    border: 1px solid red;
+    max-height: 100%;
+    overflow-x: auto;
+    /* border: 1px solid red; */
 }
 /* background-color: #111520; */
 
@@ -19,7 +20,7 @@
     align-items: center;
     background-color: #111520;
     width: 100%;
-    height: 2em;
+    min-height: 2em;
     /* border-bottom: 1px solid #111520; */
 }
 
@@ -34,9 +35,9 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height: 25%;
+    min-height: 25%;
     background-color: #111520;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .section3Pic{
@@ -91,6 +92,7 @@
     padding-left: 5px;
     padding-right: 5px;
     font-size: 1em;
+    cursor: pointer;
 }
 
 .personalinfoHeader > p{
@@ -100,7 +102,7 @@
 .personalinfoOpened{
     display: flex;
     align-items: center;
-    height: 75%;
+    height: 65%;
 }
 
 .section3Icons{
@@ -124,4 +126,84 @@
     margin: 0;
     margin-top: 0.5em;
     width: 100%;
+}
+
+.picturesinfo{
+    display: flex;
+    flex-direction: column;
+    background-color: #111520;
+    width: 100%;
+}
+
+.picturesHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.picturesHeader > p{
+    color: white;
+}
+
+.section3Openedimages {
+    width: 100%;
+    max-height: 25vh;
+    overflow-x: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* border: 1px solid blue; */
+}
+
+.section3OpenedImage {
+    width: 30%;
+    height: 10vh;
+    margin-bottom: 1vh;
+
+    /* border: 1px solid red; */
+}
+
+.filesinfo{
+    display: flex;
+    flex-direction: column;
+    background-color: #111520;
+    width: 100%;
+}
+
+.filesHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.filesHeader > p{
+    color: white;
+}
+
+.section3Openedfiles {
+    width: 100%;
+    max-height: 25vh;
+    overflow-x: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* border: 1px solid blue; */
+}
+
+.section3Openedfile {
+    width: 30%;
+    height: 10vh;
+    margin-bottom: 1vh;
+
+    /* border: 1px solid red; */
 }

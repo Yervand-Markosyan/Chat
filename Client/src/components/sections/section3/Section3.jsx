@@ -2,6 +2,8 @@ import React from "react";
 import Avatar from './Avatar'
 import Personalinfo from './Personalinfo'
 import close from './icons/close.svg'
+import Pictures from './Pictures'
+import Files from './Files'
 import "./section3.css";
 
 function Section3() {
@@ -14,6 +16,8 @@ function Section3() {
 
         <Avatar />
         <Personalinfo />
+        <Pictures />
+        <Files />
       </div>
     </>
   );

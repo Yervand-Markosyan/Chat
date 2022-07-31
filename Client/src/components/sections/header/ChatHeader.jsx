@@ -1,55 +1,46 @@
 import React from "react";
 import "./chatHeader.css";
 import logo from "..//..//..//icons/big-logo.png";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
-class ChatHeader extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      dropDown: false
-    };
-  }
+const ChatHeader = () => {
 
-  showDropDown = () => {
-    const bool = this.state.dropDown;
-    if (bool) {
-      this.setState({ dropDown: false });
+  const [dropDown, setDropDown] = useState(false)
+  const loggedUser = useSelector(state => state.setLoggedUser.thisUser)
+  const down = "\u2B9F";
+  const up = "\u2B9D";
+  const showDropDown = () => {
+
+    if (dropDown) {
+      setDropDown(false);
     } else {
-      this.setState({ dropDown: true });
+      setDropDown(true);
     }
   };
 
-  render() {
-    const down = "\u2B9F";
-    const up = "\u2B9D";
-
-    const { dropDown } = this.state;
-
-    return (
-      <div className="Cheader">
-        <img className="headerLogo" src={logo}/>
-        <div className="aboutDev">
-          <div className="aboutStyle">About the creators of chat</div>
-        </div>
-        <div className="thisPerson">
-          <i className="material-icons">
-            &#xe7f7;<div className="newMess"></div>
-          </i>
-          <div
-            className="thisImg"
-            style={{
-              backgroundImage: `url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAHkAtgMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAGAgMEBQcAAf/EAEIQAAIBAwIDBQUFBQcCBwAAAAECAwAEEQUhEjFBBhMiUWEycYGRoRRCscHwIzNy0eEHJDQ1UmKyFcJDc3SCkrPx/8QAGgEAAgMBAQAAAAAAAAAAAAAAAwQAAgUBBv/EACYRAAMAAgICAQQCAwAAAAAAAAABAgMREiEEMUEFEzJRImEjYnH/2gAMAwEAAhEDEQA/ACMR0sR1ICU4I9q1OR5lQRhHSxHUgJSglV5BFAwI6WI6kKh5DnUmztllnkE3EkcQzITt6/hQ7yKFthsXj1kepRA4AOeB7zSo1jduESJ+NUer6utxqDfY2ZbXC8CFjjI60iPUD3S8MuOE8nHEOW3qN/wNZmXz6b1Bs4vpUyv8jCYWycLN3q4G5GDn5Deu+yPwB1AZTvkfy51W28sskcchZxEwHC7HHCfgfLNWMM7svF39upBOfHgb9Rtt8jQ5+oZE+9F7+mYmuuhPdeld3dWIhaUZZgcZyRg5+VNiI5Abw74J6CnI83HS76Eb+n5Jf8eyF3Vd3VS2ULjjyCRy4TnlTNzcQ2oBmJyfZQDxHy2/nir15eGVvkUnwc1PXEaMdJMVM2esRXdz3Bt2iJICHJIbfHl+FWRTNXw+RGZbkHn8W8NatEEx0kx1NMdIMdH2LuCGUrwpUopSCtd2VcEYoKSY6klK84a7srxI3d11SCua6psnEUqU4Ep5EpzhCqWY4A60PYZQMrH6U4I6qJO0VqLloozlVOOPzp6HWEdxwkGk8vmRD0aWH6beRbfQxqWqXtrMx02NzheAyNEcIeZYZG+3wq509Rf6FPbxyt311AwaRyCxZhjJq3090uIAzDfFPC3SN+JUXb0paq5vkaEysU8F8GOzxNHI0cnhaM8BHXO4xUzSImJ76TPdoTs24Yj3/wBOdW3bOyWLWFmjQgXQ8Qx/4gIBx7/DQx231JdKtY9PtWxM43K4ynT5n8qzaTVcEaW5cqv2Oax2qhS6FrZYmlBHERyUdeX4U1atPMQZpJBE5w6h8ZA8z8aBtLvoUvP2aNLOxOWC+FT1yaJbftK9uqQmwWWYqWKIxY4PLPLYH5mjT4lP8UDXk4o/JhxA15ajhinZX28bNjjG5BP0+FQLz+0ubT765sr/AE/vHj4ChQ+2jYBHoc5zXnZ3XbbVCbS5UwXMak904znPUee2Pl6UNdtxbjW7d45UDtG8c8YPsLzB/EVFjc000SnGSVSDOftYbnJsbYIxw2S4lYAjou+Kixks+4BPEeIleQ68icDzPOgyK9dbfjIjKMBxRhQQCOgB5743PX3UQadqIliy3EEDDBUbKeQPltS9p7LzOvRYXA4biF1k4GB4tlIYjnnl7PlR8F2FZ/GVeWJCyvJg5PEeeRvjHrWiunB4R02p/wCmv+VGb9UnakYKUgpUkDIJ9a8K1rpmK5IjR0gpUsrSClWTKuSKUpBSpZSm2Wu7BuSOVrqe4a6ps5okKlUHaq6k8FjAccYzIQenlV5f3sGm2klzdEiNBnbmaE5Ln/qVwb1VKrIPCD0FJ+Tk4Qang4VeTv4K1rLy2qRbwtGQATmrFY9gTSu7HEDisWr2+z0ELQUdnZGEQDmr3nQnpErQuqk7Z2ooV8qDTmKlx0JZpfLYI9uuBb/TEZQOKUtkdcY291Y92jY3fbC8EgyIZOFQ3lgY/Otg7dL3sunj7ySE58h+sVnHbaCJNeS54sSTRji5+LGd/wBfWl6pLKxjGt40iDbxrFblLaNMsNyRgD0qVomnfabGK5Zjx4AfbmRzp/TIOKBFUZLdcVc2Gh3unyPPZvE1vJ4nhlYrwnzU9DTXjeR9unsD5vhrPC/oqLrTntLywvkcJLFOi7b8Sscb+eOfwNVvaGxkludQWdMyoQWmCgcYxxKxxtuDv65ovl0iXULyG8uHKi2OYYIAJN8YLMTjPXGKc7S2aC3t5VSWTbup+FN0jzkFlG/n8zRqzxWXbFp8TJGHSfyZ5ZGeS0kt5dpIWIYKT0PIVMsTMsa3MLd1hcP3YIA/DzG/rXti8f8A1fUWi4mjL8Sv0OSoGD8at9BhJ4sF1VfESh3Gw5fT5Uhm0qaRpYt8U2W3Zb+/3Pe3cj5iIABADEjcbkddq0OJzNk8ieedz8qp9P0BBpkDQKsM8Z4gvDlH23BPUHzqVbmNwqyRvDIp4X4Tup8scj/KmPF3j9r2JeXxzen6LJ2ROEH2jsFG5NcMn2o2X1OPyNKjtxGGJAZm+8QM48qWxUITjORyHOtFUZTkbK5pJWnY1PAOLGcbgedcVqyYNyRilIZKlFabZasmDckYrXU8Vrq7srxB3tfPFLCbVnwFG/qSKEdI1RYM2cpw8Xh361YaxqUD3Ll5kVpD7JPKompdlWvAtxBIYrkDIccj6Gl/JwfcjXyPeH5H2rbfphBDKsijhORUqFATvQjp19eae32fULdlZfvAbGiGy1i0kH70ZrDvFcV2jfnJNraZe2ybg0RWx4o1B8qG7SeN14lZcDyq4sbnvAeAFseQpnFsWy9g12pjnTV1lky1uy8EZA9k9RnoeZoF7frm5s7hQp4oMZU88MMbfE/OtS7QWj3OhSsFInjk75Qdiccx8s1lPbO8Et5DbrISIIVRs78Lk9fhiuZcXDJv9lsOTlP/AAtuzEIaMSEdM4PSrzWb42ndQ9w5iZclwcKu3WqXsQWNn3cykSRHgfIxxEdR6VfXpMuwG67D1qi9jDZ5YRLcSYtpoCy8xHNk9P51XatqQ060vrhyWMKsrcX+rIAHxJAoi0zs1bywrKe5JkGy8II9aCv7RLKGxji0ybwrcyGTAOOIIAcD1ywPwotStIor9pMEOzMLwWCrLt3sqhP4V3P1Ioq0W/gto0W6GRxrIVVsE45YHXpVZbWMaRRG1cy28cDSAkYc+LxDHmNqm6Tp+oJfpfQQl4kX92XAEq9cdQRQKXOgiamdMP7btjprdzBE0gZh4QycA+ZOKfuZhOwvLZYiwwrKknEzjORgDmR+Gaql0Cw1S0a7tuBi4AaMyce2d8nkG9cZFRYdB06xZo7uBu6z4J3Hjjboj74IPRhseXOmt3w4v0I8cXLkvYWpeyyxq6yWzhvZUOSfjSI7pnHHGvH4ipbYDI22zUK2019KfhiJlt/aEYUKwHkCOeKnaPIji4MEXADMxyR+t85o+Or3qhbLEJOpQ+ss23FGSPPi/pUhGGw6kUsSIByyfhTQJa6zwFVC9RzphNoVen8DhFIK0s0kmibAtDZFdXp511TZXiYm/Z2/btLa/snMSyjjfoRWqNC0eOABlG2KpbO9uFuYyYWxxYORV99oaNv2nCVzuQKlP9FsXa7I1xYQXqkgBZV5H1pm30O3kmU3lrE3D1xzq17pXAeI8+o606sZx4qpv4YZLXaHomitkCW9vGijoBT0V3INkVFBPlUcLilBJHDLAAZSDwg8vfXNIvtlb2i1JbMXFyxyltbszjPXHKsZhd7i6jTjJkdw7lhxZYnmfPc5q07bazcXmqT9n4ZjmCX+9S8J8cg6Yx7I+texRWthEJJ5UWRhxMx5n3Dy3pPzKW0kPeDLSbr5DqMxR2mniDfwHOeZxjfbbc5qZBEkzPxjh5YoctdRgeBHjceBcAeQ9aJrGT+5h2yCRnHWkp6Wh6kei6h07J+1LCg38TAL9azP+1DtDB2ijtI7BjMlpKzvMFI4sgDwk8xsfpVL27VJO0MtxPPv3mBnpsu31pq0g9uF52SGaIsrqvFh1O23TbPvphaSTAPb6J/Zq8F2gs7iYmco4tpeWWx7Le/oaO9AlUiG1mY29zzikHPixuN9qAotIeBBIDGCh/aNjcKDuR8SBVxp+tHVoChPHdQkElRuSOTj6e/FDb1XJegmnU8X7D64tZJRM9syW98uC3ASqSjofj5/A5qfKRdWZa9LOwym42Vv9Dr+fLrtQ9a64+p2qOVMVxG3BJgjAyRnHv2NT2miN4ZpE42ZcOCxIPkdz8KPNS96FLTlfyLGC7Np3NuzmckFE4jloySAAx8v93Pp75mngWd3JApLCRO9Y+b53PxzQ/HdJFBKgiURIzeADAxgUiHV5xK8sgY8CiPiO23PPvxirxe2gWRalhmZVxkgUgONzy9BQe+vyg+zkdKaPaCc/d+tO6M15EGbSDzptpB50HnXZsezTTa9P5fWu6K/cDIyjzrqBzr8+eX1rqhzmaBeQ21pbPO6L4eQA5nkB86p3AkBRhg9CKsu0DN3cC424yxx1wP61WMONEkjO5oc+hqvyGkle2JTBz+NPQXk8j4IHCOZNOBe9jBlXDCl9yPFjlViCZLt9wlWdj+xSWacHKjINV8cSqcEV3al5INGgKkhmnXJHoCfyFdXb0cb0tidb7PaT2pi4rlMTcPCzBuFsbHn0IPI/DrWR9q+wesaBO7o/wBus88QlYYYjGwY5O4rW7C5LxxzJs5X55q8DRXlsRJEkqOMFH3B9KpkxoJhzMwPs7cKGixH3U6vhkbJUnp8fWtNiEwsIpXjKcX3W5jB61B1vsOttefb9LGbZDkw/fhPlvzH68jT51SS6tGt5cxzcPA646eY+X1x0rJyp4600bWOlklNGT6/aXl5Pqk6x4RbkuCSBso4W+f5VD0G5MMyhiSA+CrDdD6UQ61YI2o3Ktbo03tQM5KiRSOWQf1j1oRKOszCOHu2jzkBT5+Z/DNHlcoAt8bNR7Plvt6FoxISP2qMRiUEdfPn15dM7ihPVbaLSO1hOnyf3d2V4yTkrncr8CSKkWOsCdYZI+FbqPPG7bAgefmf5nzNS4rWTVLtDDEhUMWVuLwn0z9aXW4WmHaV1yQT6fDDKNOlVuGWeZomQffwoYHHTFGF3pIMwAkThVMkcO+/LfPoelUnZbRTKwv+/MaWwKQMdw5PtuQfZDeQxgAVdmWe9wkchV5X4HGPYUHhJ+uR7xR8cJT6FM1cq6IFhogNu891IXOS42wAMnGw91Lj0PJlRyF4gpYY9nOcD5BaJ0tURECjdVCr6CmII2YPJnPeSkj+EDA/D60xONLQrVOtg0/Zr/S2RTR7Mv0NGBjfzNJKuOWaPsU+xIHHsxN0NIbsvcY6UYMZhyH0pJlmH3anIn2JAs9lrnyFe0ZGeX/RXlTZPsSR9dZf2EZ9slmA9BgH8RVdE5KsvM9M1L7QxkXNnc4PAoeNsDlxYP8A21BjyWXf3n9fr3VafRZ/kORyHPi2Xyp5XLbLyqO3tb704gI3B4hXSE+zjV3Lv7CDJqu7XSq0FtbDdeJSTjp16eRp+eYRKiO4UHAOPvE9Kp9VcT3nCCHOFXiODsQc8vWr413sFlr+Oh/Tm7sKmeSjPvG1XlhN3cnATsTt9aG0Yp4hzIz81z+Iqzil40LKdwdvl/Wr0tnIei91K7aytftaxmSFAO+VRlgv+oDrjy8qpNS0KDWEhv8ATZoRJkkMvsSD4cj+dXljMs0TK2Cu4II+FD9xYXHZ27a7013awY5kh9ru8nnjqKWvFNrjQ1GWsbVSyh1HQ4rqE2t6vczRjiU4yYzyDf7lOKANQthBqk9qVkjuDE5bbjDAJxeE8ycDnW3faNP1cQpcKqS843B+fC3w5elCvabR4dN1awu5v2ivKY0YAgkkEYOOuCRypB4bwV/qaU5lmX9mU2dhKX72zkE0UYPGc4KqdgTnbr50SWyHSotMmfE0NxCPBy7p8YK/reh/UYL7s5fh7YyqFHdNts38QI3B35+vKiDTNXtdStDHPatHzPCAWTPXG+R54+VVzbXftFsWn0aTpWsWep6dx257h4FzKM8QZR+OT8at9JtnS3kuZcmeeTvH/wBo4vZrMtJtI9O1KWZ4y0bqA8fESsgJBDY9ochv76PtCnstRiuEKzAxucxtcO6sPMb+IVfFapgc2Nyui5urk8LR27gycXdhhuAx6fmact8qirjARQoHwpmFBEVzFgxjhjRV8IHn5ZqSMhd8Z5nFMr9iz/R6Sa8LV7xbUnNXKnhNILelKNebeVQ4JJ9BXV6cV1Qgm6iFxbyRYBLDbPn0+tDccgB4D7Q5KTyopX2h76E7/wDxP/vb8avAOx9mRRlyPjvmvGudmKlYwoLFmOOX/wCH6VHvf37frpUGb9zJ7vzWroG60K065Sa+N3dFjEM8Izy26elMlyJVk6Aqd/Lr+IqLZf5fH/AP+IqW3sS/H/mKKhdskwsJo48YzhR9M/nTkErRbHqBn/4/0qFY/u19w/4CpUntD9fdaoW+C60q6CzcHFsw/rV4GDgqRll6edCmn/4iL3/9lE0H+IoVIPD6KPUdNNj3lxZJx2rHM0GM8Hqo8ufu91Qrq7D28ccwFzZyEErITxQsN1KtzG4yDvyosX978KBL7/K5/ef/ALFrs9+yVtLaLXtLpNr2n0idLdUjmVCYWXAKsOQPofSsYEV7o9zi8g7srnDspBPp61tnZz9638BoK/tV/wApj/8AUtQM+NaD+NlraKTTtall09bfuO8zyZiMrkY2PID4UdaFciNLe4tFLS2lo0Egdhh9+LO2eufnWf8AZL91P7h+JrQOw3+Hvv8AyhWXPWTSNW+42wv0+5e5tY5JV4XOMgchkZ/OpOah2P7lfePwqUK0p9GZS7Pc12a8NcK6cONJJxSqQ9Q4eFq6kNXVCH//2Q==")`
-            }}
-          >
-          </div>
-          <p className="thisFullName">Poxos Poxosyan</p>
-          <p onClick={this.showDropDown} className="dropSleck">
-            {dropDown ? up : down}
-          </p>
-        </div>
+  return (
+    <div className="Cheader">
+      <img className="headerLogo" src={logo} />
+      <div className="aboutDev">
+        <div className="aboutStyle">About the creators of chat</div>
       </div>
-    );
-  }
+      <div className="thisPerson">
+        <i className="material-icons">
+          &#xe7f7;<div className="newMess"></div>
+        </i>
+        <img
+          className="thisImg"
+          src={loggedUser?loggedUser.imgs[0]:""}
+        />
+        <p className="thisFullName">{loggedUser?loggedUser.fullName:""}</p>
+        <p onClick={showDropDown} className="dropSleck">
+          {dropDown ? up : down}
+        </p>
+      </div>
+    </div>
+  );
 }
+
 
 export default ChatHeader;

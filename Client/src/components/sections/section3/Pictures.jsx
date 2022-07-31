@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PersonalinfoOpened from "./PersonalinfoOpened";
+import PicturesOpened from "./PicturesOpened";
 import "./section3.css";
 
 function Personalinfo() {
@@ -13,13 +13,13 @@ function Personalinfo() {
 
   return (
     <>
-      <div className="personalinfo">
-        <div className="personalinfoHeader" onClick={handleClick}>
-          <p>Personal information</p>
+      <div className="picturesinfo">
+        <div className="picturesHeader" onClick={handleClick}>
+          <p>Pictures</p>
           <p>{icon}</p>
         </div>
 
-        {open ? <PersonalinfoOpened /> : null}
+        {open ? <PicturesOpened /> : null}
       </div>
     </>
   );

@@ -1,16 +1,35 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import openSocket from 'socket.io-client';
+import SECRET from "../secrets"
 
 
-class Socket {
- socket = openSocket('http://localhost:3040');
+const Socket = () => {
+  const socket = openSocket(SECRET.URL_WS_SERVER)
+  const dispatch = useDispatch()
+  const loggedUser_id = JSON.parse(localStorage.getItem("loggedUser_id"))
 
- addUser = () => {
+  //   add user
+  useEffect(() => {
+    socket.emit("addUser", {
+      userId: loggedUser_id
+    })
+  }, [])
 
-    this.socket.emit("addUser",{})
+  // get online users
+  socket.on("getUsers", users => {
+    dispatch({
+      type: "ADD_ONLINE_USERS",
+      payload: users
+    })
+  })
 
-     return users =  this.socket.on("grtUsers")
+  return ( 
+    
+    <div >
+    </div>
+  )
+
 }
 
-
-
-}
+export default Socket

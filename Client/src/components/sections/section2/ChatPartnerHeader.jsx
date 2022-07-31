@@ -12,19 +12,16 @@ const ChatPartnerHeader = () => {
   const [name, setName] = useState("Lusine Petrosyan");
   const [online, setOnline] = useState(false);
 
-  useEffect(() => {
-    Fetch.post("chat/allinfo", { thisUserId: "62d436eb48b4766760bb20d4" }).then(
-      data => setName(data.allUsers['62d436eb48b4766760bb20d4'].fullname)
-    );
-  }, []);
+    const handlerFunc = () => {
+        
+    }
 
   return (
     <div className="header">
-      <div className="leftSide">
+      <div className="leftSide" onClick = {handlerFunc}>
         <div className="pic" style={{ backgroundImage: `url(${image})` }} />
         <div className="textArea">
           <h6>{name}</h6>
-          {/* <h6></h6> */}
           <div className="online1">
             <p>
               {online ? "online" : `${new Date().getMinutes()} minutes ago`}

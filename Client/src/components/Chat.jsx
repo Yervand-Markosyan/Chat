@@ -1,48 +1,34 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ChatHeader from "./sections/header/ChatHeader";
+import Error from "./Error";
 import Section1 from "./sections/section1/Section1";
 import Section2 from "./sections/section2/Section2";
 import Section3 from "./sections/section3/Section3";
-import Fetch from "../JS/services/fetch"
-import openSocket from 'socket.io-client';
+import Socket from "../JS/soket_Io_client/Socket";
+import Posts from "../JS/posts";
 import "./styles.css/chat.css";
 
-const Chat = () => {
-  
-  // const socket = openSocket('http://localhost:3040');
-// socket.emit("addUser")
-  const refreshToken = () => {
-   Fetch.get("auth/refreshtoken")
-   .then(data => {
-    if (data) {
-      localStorage.removeItem("token")
-      localStorage.setItem("token", JSON.stringify(data.token))
-      
-    }else{
-    window.location.href = "http://localhost:3000"
-    }
-   })
-   .catch(e => {
-    window.location.href = "http://localhost:3000"
-   })
+function Chat() {
+  const error = useSelector(state => state.setError.error);
+  if (error) {
+    return <Error />;
   }
 
-  setInterval(() => {
-    refreshToken()
-  }, 200000);
-
-    return (
-      
+  return (
+    <>
+      <Posts />
+      <Socket />
       <div className="chat">
-        {console.log(JSON.parse(localStorage.getItem("thisUserAbout")).thisUser_id)}
         <ChatHeader />
-        <div className='sections'>
+        <div className="sections">
           <Section1 />
           <Section2 />
-          {true ? <Section3/> : null}
+          {true ? <Section3 /> : null}
         </div>
       </div>
-    );
-  }
+    </>
+  );
+}
 
 export default Chat;

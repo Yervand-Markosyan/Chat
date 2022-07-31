@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension"
 import usersReducer from "./reducers/usersReducer"
 import loggedReducer from "./reducers/loggedReducer"
 import conversationReducer from "./reducers/conversationRed"
-import errorReducer from "./reducers/errorREducer"
+import errorReducer from "./reducers/errorReducer"
 import onlineUsersReducer from "./reducers/onlineUsersReducer"
 
 const rootReducer = combineReducers({

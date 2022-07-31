@@ -50,7 +50,7 @@
     justify-content: space-between;
     align-items: center;
     width: 95%;
-    overflow-x: auto;
+    /* overflow-x: auto; */
     scroll-padding-right: 10px;
 }
 
@@ -139,7 +139,7 @@ hr{
 .zoneChat{
     width: 95%;
     max-height: 100%;
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 .zoneGroup{

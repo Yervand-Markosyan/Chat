@@ -28,7 +28,8 @@ const Posts = () => {
     //  logged user about
     fetch.post('auth/userbyid', { loggedUser_id, })
       .then(data => {
-        dispatch({ type: "ADD_LOGGED_USERS", payload: data })
+        dispatch({ type: "ADD_LOGGED_USER", payload: data })
+        dispatch({ type: "ADD_CREATOR_ID", payload: loggedUser_id })
       })
       .catch(e => {
         dispatch({ type: "ADD_ERROR", payload: true })
@@ -36,6 +37,7 @@ const Posts = () => {
           window.location.pathname = "/"
         }, 2000);
       })
+
     // conversations companion users
     fetch.post('chat/conversation_by_user_id', { loggedUser_id })
       .then(data => {
@@ -47,6 +49,13 @@ const Posts = () => {
           window.location.pathname = "/"
         }, 2000);
       })
+      //// groups
+
+      fetch.post("chat/group_by_user_id",{loggedUser_id,})
+      .then(data=>{
+        dispatch({ type: "ADD_GROUPS", payload: data })
+      })
+
     //  get users for search 
     fetch.get("chat/all_registered_users")
       .then(data => {

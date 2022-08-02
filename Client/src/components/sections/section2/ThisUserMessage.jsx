@@ -1,20 +1,19 @@
-import * as React from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
 export default function ThisUserMessage(props) {
-  const [image, setImage] = React.useState(
-    "https://mlhmvq6amqed.i.optimole.com/HIId8M4.WANK~27a14/w:940/h:788/q:auto/https://hackspirit.com/wp-content/uploads/2021/06/Copy-of-Rustic-Female-Teen-Magazine-Cover.jpg"
-  );
+  const data = useSelector(state => state.setLoggedUser.thisUser);
+  console.log(data);
 
   return (
     <>
-      
       <div className="leftMessage">
         <p className="messageContent">{props.value}</p>
       </div>
 
       <div
         className="thisUserPic"
-        style={{ backgroundImage: `url(${image})` }}
+        style={{ backgroundImage: `url(${data.imgs[0]})` }}
       />
     </>
   );

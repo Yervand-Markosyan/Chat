@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from 'react-redux'
 import Avatar from './Avatar'
 import Personalinfo from './Personalinfo'
 import close from './icons/close.svg'
@@ -7,11 +8,17 @@ import Files from './Files'
 import "./section3.css";
 
 function Section3() {
+  const dispatch = useDispatch()
+
+  function handlerClose() {    
+    dispatch({type: 'CHANGE-SECTION3', payload: false})
+  }
+
   return (
     <>
       <div className="section3">
         <header>
-          <img src = {close} alt = '/'/>
+          <img src = {close} alt = '/' onClick = {handlerClose}/>
         </header>
 
         <Avatar />

@@ -1,17 +1,13 @@
 import React from "react";
 import Person from "..//Person";
 import Group from "..//Group";
+import CreatGroup from "../createGroup";
 import { useSelector } from "react-redux";
 import "..//section1.css";
 
 function All() {
-  const error = false;
   const persons = useSelector(state => state.setConversations.conversations);
-
-  if (error) {
-    return "popup error";
-  }
-
+  const groups = useSelector(state => state.setGroups.groups)
   return (
     <>
       <div className="twoChatZone">
@@ -29,11 +25,11 @@ function All() {
         <div className="border">
           <p>Groups</p>
           <div className="zone">
-            {/* Գենեռացվող */}
-            <Group />
-            <Group />
-            <Group />
-            <Group />
+            <CreatGroup/>
+            {groups.map(item => {
+                return <Group data={item} key={item._id}/>
+              })}
+
           </div>
         </div>
       </div>

@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./section2.css";
 import camera from "..//..//..//..//src/icons/camera.svg";
 import phone from "..//..//..//..//src/icons/phone.svg";
 import Fetch from "..//..//..//JS/services/fetch";
 
 const ChatPartnerHeader = () => {
-  const [image, setImage] = useState(
-    "https://mlhmvq6amqed.i.optimole.com/HIId8M4.WANK~27a14/w:940/h:788/q:auto/https://hackspirit.com/wp-content/uploads/2021/06/Copy-of-Rustic-Female-Teen-Magazine-Cover.jpg"
-  );
+  
+  const dispatch = useDispatch();
+  const data = useSelector(state => state.setChangeSection2.changeSection2);
+  const online = useSelector(state => state.setChangeSection2.isOnline);
 
-  const [name, setName] = useState("Lusine Petrosyan");
-  const [online, setOnline] = useState(false);
-
-    const handlerFunc = () => {
-        
-    }
+  const handlerOpen = () => {
+    dispatch({ type: "CHANGE-SECTION3", payload: true });
+  };
 
   return (
     <div className="header">
-      <div className="leftSide" onClick = {handlerFunc}>
-        <div className="pic" style={{ backgroundImage: `url(${image})` }} />
+      <div className="leftSide" onClick={handlerOpen}>
+        <div
+          className="pic"
+          style={{ backgroundImage: `url(${data.imgs[0]})` }}
+        />
         <div className="textArea">
-          <h6>{name}</h6>
+          <h6>{data.name + ' ' + data.lastname}</h6>
           <div className="online1">
             <p>
               {online ? "online" : `${new Date().getMinutes()} minutes ago`}
@@ -42,6 +44,6 @@ const ChatPartnerHeader = () => {
       </div>
     </div>
   );
-}
+};
 
 export default ChatPartnerHeader;

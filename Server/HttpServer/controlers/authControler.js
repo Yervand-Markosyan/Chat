@@ -1,7 +1,6 @@
 // libs
 const  bcrypt = require("bcryptjs");
 const  jwt = require("jsonwebtoken");
-const  dotenv = require("dotenv");
 const  { validationResult } = require("express-validator");
 // mongodb
 const User = require("../models/user");
@@ -9,8 +8,6 @@ const  Role = require("../models/role");
 //secret
 const  Secret = require("../secrets/config");
 
-
-dotenv.config();
 const generateAccesToken = (email, roles) => {
   const payload = {
     email,

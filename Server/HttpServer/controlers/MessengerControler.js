@@ -2,6 +2,7 @@
 const User = require("../models/user");
 const MessageSchame = require("../models/MessageSchame");
 const ConversationSchame = require("../models/ConversationSchame");
+const GrupConversationsSchame = require("../models/GrupConversationsSchame");
 
 class MessageControlre {
   //////////////////////////////////// Conversation /////////////////////////////////
@@ -17,7 +18,7 @@ class MessageControlre {
       res.status(500).json("conversation dont saveing");
     }
   }
-
+////  persons
   async getConvById(req, res) {
     try {
       const conversation = await ConversationSchame.find({
@@ -28,6 +29,7 @@ class MessageControlre {
       res.status(500).json("conversation not found");
     }
   }
+////// person info
   async aboutConvers(req, res) {
     try {
       const data = {};
@@ -54,6 +56,50 @@ class MessageControlre {
     }
   }
 
+  //////////////////////////////////// Goups /////////////////////////////////
+  async newGrupConversation(req, res) {
+    const groupInfo = {
+      name: req.body.name,
+      members: [req.body.creator_id],
+    }
+    if(req.body.img){
+      groupInfo.img = req.body.img
+    }
+    try {
+        const newConversation = new GrupConversationsSchame(groupInfo)
+      const savedConv = await newConversation.save();
+
+      res.json(savedConv);
+    } catch (error) {
+      res.status(500).json("conversation dont saveing");
+    }
+  }
+/// add user to group
+  async addUsersGrup(req,res){
+    try {
+      const conversation_id = req.body.conversation_id
+      const members = req.body.newMembers
+      const data = await GrupConversationsSchame.findOneAndUpdate({_id:conversation_id},{members,})
+      const newData = await GrupConversationsSchame.find({_id:conversation_id})
+      res.json(newData);
+    } catch (error) {
+      res.status(500).json("conversation not found");
+    }
+  }
+  
+//// get groups 
+async getGropuById(req, res) {
+  try {
+    const groups = await GrupConversationsSchame.find({
+      members: { $in: [req.body.loggedUser_id] },
+    });
+    res.json(groups);
+  } catch (error) {
+    res.status(500).json("conversation not found");
+  }
+}
+
+
   ////////////////////////////////// Messages ////////////////////////////////////////
 
   async addMess(req, res) {
@@ -69,7 +115,7 @@ class MessageControlre {
 
   async getMess(req, res) {
     try {
-      const message = MessageSchame.find({
+      const message = await MessageSchame.find({
         conversationId: req.body,
       });
       res.json(message);

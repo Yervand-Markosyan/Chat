@@ -53,6 +53,9 @@ const usersSchame = new mongoose.Schema({
     },
     type:Object,
   },
+  dateOffline:{
+    type: String,
+  },
   roles: {
     type: String,
     ref: "Role",

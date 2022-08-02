@@ -4,6 +4,7 @@ import Search from "./Search";
 import OnlyGroups from "./filter/OnlyGroups";
 import All from "./filter/All";
 import OnlyChats from "./filter/OnlyChats";
+import CreateGroupPopUp from "./createGroupop";
 
 import fetch from "..//..//..//JS/services/fetch";
 
@@ -38,6 +39,8 @@ function Section1() {
   }
 
   return (
+    <>
+    <CreateGroupPopUp/>
     <div className="section1">
       <Search />
       <div className="navigations">
@@ -58,6 +61,7 @@ function Section1() {
         {openChat ? <OnlyChats /> : openGroup ? <OnlyGroups /> : <All />}
       </div>
     </div>
+    </>
   );
 }
 

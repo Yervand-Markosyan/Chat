@@ -21,16 +21,18 @@ const PORT = SECRET.PORT || "3033";
 const app = express();
 app.get("/", (r, e) => console.log(46546))
 app.use(cors({
-  origin: ["http://localhost:3000","http://localhost:3001"]
+  origin: ["http://localhost:3000","http://localhost:3001"],
+  maxHttpBufferSize: 1e8
 }));
-app.use(express.json());
+app.use(express.json({limit: "30mb",extended:true}));
 app.use("/auth", routerClient);
 app.use("/admin", routerAdmin);
 app.use("/chat", routerMessages);
 
 app.post('/chatpx/filefromclient', upload.any(), async (req, res, nxt) => {
   try {
-    console.log(req.files)
+    console.log(req.files);
+    let info;
     // uploaded file are accessible as req.files
     if (req.files) {
       // console.log(req)
@@ -39,16 +41,15 @@ app.post('/chatpx/filefromclient', upload.any(), async (req, res, nxt) => {
         // upload file to gridfs
         const gridFile = new GridFile({ filename: file.originalname })
         await gridFile.upload(fileStream)
-        console.log(gridFile)
         // delete the file from local folder
         fs.unlinkSync(file.path)
         const data = await GridFile.find({ gridFile })
-        const info = data[data.length - 1]
+         info = data[data.length - 1]
         console.log(SECRET.serverUrl + info._id + "/" + info.filename);
 
       })
       await Promise.all(promises)
-      res.sendStatus(201).json(SECRET.serverUrl + info._id + "/" + info.filename)
+      res.send(SECRET.serverUrl + info._id + "/" + info.filename)
     }
   } catch (err) {
     nxt(err)

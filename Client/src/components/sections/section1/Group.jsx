@@ -1,41 +1,23 @@
 import React from "react";
 
-class Group extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-    this.state = {
-      online: props.online,
-      date: props.date,
-      name: props.name,
-      lastname: props.lastname,
-      lastmessage: props.lastmessage,
-      img: props.img
-      //    people: [] <-- WS folder
-    };
-  }
+export default function Group(data){
+   const info = data.data
 
-  render() {
+
     return (
-      <div className="groupInfo" key={this.props._id}>
+      <div className="groupInfo" key={info._id+1}>
         <div className="avatar">
-          <img src={this.props.src} alt="img"></img>
+          <img src={info.img} alt="img"></img>
         </div>
         <div className="personAbout">
           <div className="fullName">
-            <p>{`${this.props.name} ${this.props.lastname}`}</p>
-            <div
-              className={this.state.online === "online" ? "online" : "offline"}
-            ></div>
-            <p>...</p>
+            <p>{info.name}</p>
           </div>
-          <p className="lastMessage">{this.props.lastmessage}</p>
-          <p className="lastMessDate">{this.props.date}</p>
+          {/* <p className="lastMessage">{this.props.lastmessage}</p>
+          <p className="lastMessDate">{this.props.date}</p> */}
         </div>
         <div className="newMessage"></div>
       </div>
     );
   }
-}
 
-export default Group;

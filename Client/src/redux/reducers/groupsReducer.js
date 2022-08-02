@@ -1,13 +1,13 @@
 const initialState = {
-    searchUsers: [],
+    groups: []
 }
 
-export default function SearchReducer(state = initialState, action) {
+export default function groupsReducer(state = initialState, action) {
     switch (action.type) {
-        case 'ADD_SEARCH_USERS':
+        case "ADD_GROUPS":
             return {
                 ...state,
-                searchUsers: action.payload
+                groups: action.payload
             }
             default:
                 return state

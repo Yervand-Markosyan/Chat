@@ -7,8 +7,6 @@ import "./section2.css";
 const value =
   "Vax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli aper";
 
-let t = true;
-
 function ChatZone() {
   // useEffect = () => {
     // REDAX -> const messages = redax.messages
@@ -20,7 +18,7 @@ function ChatZone() {
   return (
     <>
       <div className="showMessages">
-        {t ? (
+        {true ? (
           <>
             <div className="thisUserMessage">
               <ThisUserMessage value={value} />

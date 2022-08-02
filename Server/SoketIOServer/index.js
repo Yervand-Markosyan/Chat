@@ -26,6 +26,7 @@ const addUser = (userId, socketId) => {
 
 const removeUser = (socketId) => {
   users = users.filter((user) => user.socketId !== socketId);
+
 };
 
 const getUser = (userId) => {
@@ -46,7 +47,7 @@ io.on("connection", (socket) => {
   });
 
   //send and get message
-  socket.on("sendMessage", async ({ senderId, message, companionId }) => {
+  socket.on("sendMessage", async ({ senderId, message, companionId ,conversationId}) => {
     const messageForMongo = {
       conversationId,
       senderId,

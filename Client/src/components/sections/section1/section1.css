@@ -50,7 +50,7 @@
     justify-content: space-between;
     align-items: center;
     width: 95%;
-    /* overflow-x: auto; */
+    overflow-x: auto;
     scroll-padding-right: 10px;
 }
 
@@ -146,4 +146,8 @@ hr{
     width: 95%;
     max-height: 100%;
     overflow: auto;
+}
+
+.personZone{
+    width: 100%;
 }

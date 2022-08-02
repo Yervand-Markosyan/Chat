@@ -10,6 +10,7 @@ import Posts from "../JS/posts";
 import "./styles.css/chat.css";
 
 function Chat() {
+  const changeSection3 = useSelector(state => state.setChangeSection3.changeSection3)
   const error = useSelector(state => state.setError.error);
   if (error) {
     return <Error />;
@@ -24,7 +25,7 @@ function Chat() {
         <div className="sections">
           <Section1 />
           <Section2 />
-          {true ? <Section3 /> : null}
+          {changeSection3 ? <Section3 /> : null}
         </div>
       </div>
     </>

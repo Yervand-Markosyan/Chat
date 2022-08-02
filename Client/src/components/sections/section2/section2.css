@@ -1,3 +1,7 @@
+.bigLogo{
+    width: 25vh;
+}
+
 .section2 {
     display: flex;
     flex-direction: column;
@@ -92,6 +96,7 @@ p {
 
 .button {
     height: 1.1em;
+    cursor: pointer;
 }
 
 .messagePlace {
@@ -108,6 +113,7 @@ p {
 .messagePlace > p {
     font-size: 1em;
     color: rgb(0, 133, 104);
+    cursor: pointer;
 }
 
 .messagePlace > textarea {
@@ -126,6 +132,7 @@ p {
 .send {
     width: 0.9em;
     height: 0.9em;
+    cursor: pointer;
 }
 
 .showMessages {
@@ -142,6 +149,7 @@ p {
 .smile {
     width: 1em;
     height: 1em;
+    cursor: pointer;
 }
 
 .thisUserMessage {

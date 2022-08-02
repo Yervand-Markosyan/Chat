@@ -1,26 +1,25 @@
-import React from 'react';
-import ChatPartnerHeader from './ChatPartnerHeader'
-import MessageArea from './MessageArea'
-import ChatZone from './ChatZone'
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import ChatPartnerHeader from "./ChatPartnerHeader";
+import MessageArea from "./MessageArea";
+import ChatZone from "./ChatZone";
+import logo from "..//..//..//icons/big-logo.png";
 import "./section2.css";
 
-class Section2 extends React.Component{
-    constructor(){
-        super();
-        this.state={
+export default function Section2() {
+  const data = useSelector(state => state.setChangeSection2.isOpen);
 
-        }
-    }
-
-    render(){
-        return(
-            <div className='section2'>
-                <ChatPartnerHeader />
-                <ChatZone/>
-                <MessageArea />
-            </div>
-        )
-    }
+  return (
+    <div className="section2">
+      {data ? (
+        <>
+          <ChatPartnerHeader />
+          <ChatZone />
+          <MessageArea />
+        </>
+      ) : (
+        <img className="bigLogo" src={logo} />
+      )}
+    </div>
+  );
 }
-
-export default Section2;

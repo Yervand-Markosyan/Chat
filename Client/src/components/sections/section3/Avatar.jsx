@@ -1,23 +1,21 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "./section3.css";
 
 function Avatar() {
-  const [image, setImage] = useState(
-    "https://mlhmvq6amqed.i.optimole.com/HIId8M4.WANK~27a14/w:940/h:788/q:auto/https://hackspirit.com/wp-content/uploads/2021/06/Copy-of-Rustic-Female-Teen-Magazine-Cover.jpg"
-  );
 
-  const [name, setName] = useState("Lusine Petrosyan");
-  const [online, setOnline] = useState(true);
+  const data = useSelector(state => state.setChangeSection2.changeSection2);
+  const online = useSelector(state => state.setChangeSection2.isOnline);
 
   return (
     <>
       <div className="picAndFullName">
         <div
           className="section3Pic"
-          style={{ backgroundImage: `url(${image})` }}
+          style={{ backgroundImage: `url(${data.imgs[0]})` }}
         ></div>
         <div className="Section3OnlineRound"></div>
-        <h4 className="fullNameGeneral">{name}</h4>
+        <h4 className="fullNameGeneral">{data.name + ' ' + data.lastname}</h4>
         <div className="section3Online">
           <p>{online ? "online" : `${new Date().getMinutes()} minutes ago`}</p>
           <div

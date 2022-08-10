@@ -1,0 +1,14 @@
+.groupInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #111520;
+    margin:0.5vh 0 0.5vh ;
+    border-radius: 0.3em;
+}
+
+.avatar_group{
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "..//sections/section2/section2.css";
 
 function Time() {

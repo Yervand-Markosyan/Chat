@@ -9,7 +9,12 @@ export default function groupsReducer(state = initialState, action) {
                 ...state,
                 groups: action.payload
             }
-            default:
-                return state
+        case "ADD_CREATED_GROUP":
+            return{
+                  groups :  [...state.groups , ...action.payload]
+                }
+            
+        default:
+            return state
     }
 }

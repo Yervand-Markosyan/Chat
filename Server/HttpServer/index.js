@@ -14,12 +14,13 @@ const SECRET = require("./secrets/config");
 //db
 const GridFile = require("./models/filesSchame");
 const Users = require("./models/user")
+const message = require("./models/MessageSchame");
+const { send } = require("process");
 ////middleWare
 const upload = multer({ dest: path.join(__dirname, '.') })
 
 const PORT = SECRET.PORT || "3033";
 const app = express();
-app.get("/", (r, e) => console.log(46546))
 app.use(cors({
   origin: ["http://localhost:3000","http://localhost:3001"],
   maxHttpBufferSize: 1e8
@@ -73,6 +74,15 @@ app.get('/chatpx/files/:id/:name', async (req, res, nxt) => {
     nxt(err)
   }
 })
+
+// app.get('/delete',(req,res)=>{
+//   message.find({}).then(data => {
+//     data.forEach(item => {
+//       message.deleteOne({_id:item._id}).then(data => console.log(data))
+//     })
+//   })
+//   res.send("ok")
+// })
 
 async function startAPP() {
   try {

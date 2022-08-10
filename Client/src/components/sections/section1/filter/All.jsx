@@ -1,7 +1,7 @@
 import React from "react";
 import Person from "..//Person";
 import Group from "..//Group";
-import CreatGroup from "../createGroup";
+import CreatGroup from "../CreateGroup";
 import { useSelector } from "react-redux";
 import "..//section1.css";
 

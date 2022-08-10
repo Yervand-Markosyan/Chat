@@ -1,60 +1,45 @@
-import React, { useState } from "react";
+import React, { Fragment } from "react";
 import ThisUserMessage from "./ThisUserMessage";
 import OtherUserMessage from "./OtherUserMessage";
+import { useSelector } from "react-redux/es/exports";
 import Time from "..//Time";
 import "./section2.css";
+import { useEffect } from "react";
+import { useRef } from "react";
 
-const value =
-  "Vax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli apervax@ petq a gnanq tex, heto urish tex u tenc eli aper";
 
 function ChatZone() {
-  // useEffect = () => {
-    // REDAX -> const messages = redax.messages
-    // REDAX -> const sendlerId = redax.sendlerId
-    // LocalStorage -> const thisUserId = JSON.parse(localStorage.getItem("thisUserAbout")).thisUser_id
-    <></>;
-  // };
+  const allMessages = useSelector(state => state.setAllMessages.allMessages)
+  const bottomRef = useRef(null)
+  const loggedUser_id = JSON.parse(localStorage.getItem("loggedUser_id"))
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+  }, [allMessages]);
 
   return (
     <>
-      <div className="showMessages">
-        {true ? (
-          <>
-            <div className="thisUserMessage">
-              <ThisUserMessage value={value} />
-            </div>
-            <Time />
-          </>
-        ) : (
-          <>
-            <div className="otherUserMessage">
-              <OtherUserMessage value={value} />
-            </div>
-            <Time />
-          </>
-        )}
-        {/* <div className="thisUserMessage">
-          <ThisUserMessage value={value} />
-        </div>
-
-        <Time />
-
-        <div className="otherUserMessage">
-          <OtherUserMessage value={value} />
-        </div>
-
-        <div className="thisUserMessage">
-          <ThisUserMessage value={value} />
-        </div>
-
-        <div className="thisUserMessage">
-          <ThisUserMessage value={value} />
-        </div>
-
-        <div className="otherUserMessage">
-          <OtherUserMessage value={value} />
-        </div> */}
-        {/* (sendlerId == thisUserId ? <ThisUserMessage /> : <OtherUserMessage />) */}
+      <div className="showMessages" >
+        {allMessages.map(item => {
+          if (item.senderId === loggedUser_id) {
+            return (
+            <Fragment key={item._id + "1"}>
+              <Time />
+              <div className="thisUserMessage" key={item._id}>
+                <ThisUserMessage value={item.message} id = {item._id} conversId = {item.conversationId} type={item.type}/>
+              </div>
+            </Fragment>)
+          } else {
+            return (
+            <Fragment key={item._id + "1"}>
+              <Time />
+              <div className="otherUserMessage" key={item._id} id = {item._id}>
+                <OtherUserMessage value={item.message} />
+              </div>
+            </Fragment>)
+          }
+        })}
+        <div ref={bottomRef}/> 
       </div>
     </>
   );

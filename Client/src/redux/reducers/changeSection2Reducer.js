@@ -18,6 +18,7 @@ export default function openSection3Reducer(state = initialState, action) {
                 }
                 case 'IS_ONLINE':
                     return {
+                        ...state,
                         isOnline: action.payload,
                     }
                     case 'CONVERSATION_ID':

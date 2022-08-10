@@ -33,9 +33,7 @@ class Fetch {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
       xhr.responseType = "json";
-      xhr.setRequestHeader("Accept", 'application/json',);
-      xhr.setRequestHeader("Content-Type", "multipart/form-data");
-      xhr.setRequestHeader('Access-Control-Allow-Origin', '*',);
+      xhr.setRequestHeader("Accept", 'application/json',)
       xhr.setRequestHeader("authorization", `Bearer`);
       xhr.onload = () => {xhr.status >= 400 ? reject("not found") : resolve(xhr.response)};
       xhr.send(JSON.stringify(body));

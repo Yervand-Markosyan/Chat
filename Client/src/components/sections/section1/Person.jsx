@@ -1,59 +1,71 @@
 import React, { useEffect, useState } from "react";
+import { useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import fetch from "../../../JS/services/fetch";
-// import socket from "../../../JS/soket_Io_client/Socket";
 import './person.css'
 
 export default function Person(props) {
 
   const [data, setData] = useState('')
+  const [isOnline,setIsOnline] = useState(false)
   const dispatch = useDispatch()
   const onlineUsers = useSelector(state => state.setOnlineUsers.onlineUsers)
 
 
   const loggedUser_id = JSON.parse(localStorage.getItem("loggedUser_id"))
   const members = props.props.members
-  const companion_id = members.find(id => { if (id !== loggedUser_id) { return id } })
-  
-  useEffect(() => {
-    fetch.post("chat/about_companion", { companion_id, })
-    .then(data => {setData(data); dispatch({type: 'CONVERSATION_ID', payload: props.props._id})})
-    .catch(e => {
+  const companion_id = members.find(id => id !== loggedUser_id )
+
+  useLayoutEffect(() => {
+    fetch.post("chat/about_companion", { companion_id,conversId:props.props._id })
+      .then(data => {
+        setData(data);
+      })
+      .catch(e => {
         dispatch({ type: "ADD_ERROR", payload: true })
         setTimeout(() => {
           window.location.pathname = "/"
         }, 2000);
       })
-  }, [])
+  },[])
 
   useEffect(() => {
     if (data && onlineUsers) {
       let arr = []
       onlineUsers.map(item => arr.push(item.userId))
-      arr.includes(data._id) ? dispatch({type: 'IS_ONLINE', isOnline: true}) : dispatch({type: 'IS_ONLINE', isOnline: false})
+      arr.includes(data._id) ? setIsOnline(true) : setIsOnline(false)
     }
   }, [onlineUsers])
 
-  function handlerOpenSection2(){
-    dispatch({type: 'IS_OPEN', payload: true})
-    dispatch({type: 'CHANGE-SECTION2', payload: data})
+  function handlerOpenSection2() {
+    fetch.get(`chat/mess${props.props._id}`)
+    .then(data=>{
+      dispatch({ type: 'SET_MESSAGES', payload: data })
+      dispatch({ type: "SEND_MESSAGE_DATA", payload: props.props._id, key: "conversationId" })
+      dispatch({ type: "SEND_MESSAGE_DATA", payload: companion_id, key: "companionId" })
+    })
+    .then(ok => {
+      dispatch({ type: 'IS_OPEN', payload: true })
+      dispatch({ type: 'CHANGE-SECTION2', payload: data })
+    })
   }
-  
+
   return (
-    <div className="chatInfo" onClick = {handlerOpenSection2}>
+    
+    <div className="chatInfo" onClick={handlerOpenSection2}>
       <div className="personAbout">
         <div className="avatar">
           <img src={data ? data.imgs[0] : ''} alt="pic" className="avatar" />
+           <div className={isOnline ? "online" : "offline"} /> 
 
-          <div className={useSelector(data => data.isOnline) ? "online" : "offline"} />
         </div>
         <div className="name_mess">
           <div className="fullName">
             <p>{data ? (data.name + " " + data.lastname) : ""}</p>
           </div>
           <div className="lastMess">
-            <p className="lastMessage">Barev!</p>
-            <p className="lastMessDate">21:58</p>
+            <p className="lastMessage">{data.lastMessage?data.lastMessage:"Not message"}</p>
+            <p className="lastMessDate">{data.lastMessageDate ? data.lastMessageDate:"🕛"}</p>
           </div>
         </div>
       </div>

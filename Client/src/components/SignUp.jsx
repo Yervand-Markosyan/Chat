@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.css/signup.css";
+import "./stylesCSS/signup.css";
 import Fetch from "../JS/services/fetch.js";
 import { Link } from "react-router-dom";
 
@@ -27,7 +27,6 @@ class SignUp extends React.PureComponent {
         <div className="signupBody">
             <div className="signupForm">
                 <h4>Registration</h4>
-                {/* <div className="signUpInputs"> */}
                   <input
                     className="inp"
                     onChange={e => this.setState({ name: e.target.value })}

@@ -72,10 +72,10 @@
 }
 
 .online,
-.ofline {
+.offline {
     position: absolute;
-    height: 0.5em;
-    width: 0.5em;
+    height: 8px;
+    width: 8px;
     border-radius: 50%;
 }
 

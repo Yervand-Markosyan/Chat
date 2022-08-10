@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import fetch from "./services/fetch";
 import { useDispatch } from "react-redux"
-import Socket from "./soket_Io_client/Socket";
 
 const Posts = () => {
   const dispatch = useDispatch()
   const loggedUser_id = JSON.parse(localStorage.getItem("loggedUser_id"))
-  console.log(loggedUser_id)
   const refreshToken = () => {
     fetch.get("auth/refreshtoken")
       .then(data => {
@@ -25,6 +23,8 @@ const Posts = () => {
 
   useEffect(() => {
     refreshToken()
+    /// dispatch loged id
+    dispatch({type:"SEND_MESSAGE_DATA", payload:loggedUser_id , key:"senderId"}, )
     //  logged user about
     fetch.post('auth/userbyid', { loggedUser_id, })
       .then(data => {
@@ -39,7 +39,7 @@ const Posts = () => {
       })
 
     // conversations companion users
-    fetch.post('chat/conversation_by_user_id', { loggedUser_id })
+    fetch.post('chat/conversation_by_user_id', { loggedUser_id, })
       .then(data => {
         dispatch({ type: "ADD_CONVERSATIONS", payload: data })
       })

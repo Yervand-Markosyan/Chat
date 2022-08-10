@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import ChatPartnerHeader from "./ChatPartnerHeader";
 import MessageArea from "./MessageArea";
@@ -8,7 +8,6 @@ import "./section2.css";
 
 export default function Section2() {
   const data = useSelector(state => state.setChangeSection2.isOpen);
-
   return (
     <div className="section2">
       {data ? (

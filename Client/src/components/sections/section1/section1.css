@@ -29,7 +29,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 0.5em 1em 1em 1em;
+    margin: 0.5em 1em 0 1em;
     padding: 2px 0 3px 7px;
     background-color: transparent;
     border: 1px solid #5e5e5e;
@@ -68,6 +68,7 @@
     display: flex;
     justify-content: space-around;
     width: 90%;
+    margin-top: 1em;
     border-bottom: 1px solid #5e5e5e;
 }
 
@@ -150,4 +151,61 @@ hr{
 
 .personZone{
     width: 100%;
+}
+
+.dropdown{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    min-height: 20px;
+    margin: 0;
+    padding: 0;
+    background-color: #111520;
+    border-radius: 0 0 7px 7px;
+}
+
+.dropdown > li {
+    position: relative;
+    width: 100%;
+    height: auto;
+    list-style: none;
+    padding-top: 5px;
+    border-top: 1px solid #2a354e;
+}
+
+.dropdown >li:hover {
+    background-color: #0d101a;
+}
+
+.searchedPerson{
+    display: flex;
+    width: 80%;
+    margin: 0 11px;
+    justify-content: flex-start;
+}
+
+.searchedAvatar{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.searchedFullName{
+    color: white;
+    margin-left: 10px;
+}
+
+.userIsNotFoundDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5em;
+}
+
+.userIsNotFoundIcon{
+    width: 40px;
+    height: 40px;
 }

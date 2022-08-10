@@ -21,7 +21,7 @@ const ChatHeader = () => {
 
   return (
     <div className="Cheader">
-      <img className="headerLogo" src={logo} />
+      <img className="headerLogo" src={logo} alt="img"/>
       <div className="aboutDev">
         <div className="aboutStyle">About the creators of chat</div>
       </div>
@@ -31,7 +31,8 @@ const ChatHeader = () => {
         </i>
         <img
           className="thisImg"
-          src={loggedUser?loggedUser.imgs[0]:""}
+          src={loggedUser?loggedUser.imgs[0]:"" }
+          alt="img"
         />
         <p className="thisFullName">{loggedUser?loggedUser.fullName:""}</p>
         <p onClick={showDropDown} className="dropSleck">

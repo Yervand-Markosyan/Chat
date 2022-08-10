@@ -5,7 +5,6 @@ import fb from "./icons/facebook.svg";
 import insta from "./icons/instagram.svg";
 import linkedin from "./icons/linkedin.svg";
 import "./section3.css";
-import Fetch from "..//..//..//JS/services/fetch";
 
 function PersonalinfoOpened() {
   const [info, setInfo] = useState({});

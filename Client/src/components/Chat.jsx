@@ -5,9 +5,9 @@ import Error from "./Error";
 import Section1 from "./sections/section1/Section1";
 import Section2 from "./sections/section2/Section2";
 import Section3 from "./sections/section3/Section3";
-import Socket from "../JS/soket_Io_client/Socket";
+import SOCKET from "../JS/soket_Io_client/Socket";
 import Posts from "../JS/posts";
-import "./styles.css/chat.css";
+import "./stylesCSS/chat.css";
 
 function Chat() {
   const changeSection3 = useSelector(state => state.setChangeSection3.changeSection3)
@@ -19,7 +19,7 @@ function Chat() {
   return (
     <>
       <Posts />
-      <Socket />
+      <SOCKET.Socket />
       <div className="chat">
         <ChatHeader />
         <div className="sections">

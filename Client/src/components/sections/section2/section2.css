@@ -137,12 +137,13 @@ p {
 
 .showMessages {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
     width: 100%;
     min-height: 70%;
     overflow: auto;
+    /* overflow-y: hidden;
+    overflow-x: scroll; */
     padding: 10px 0;
 }
 
@@ -193,6 +194,7 @@ p {
 .messageContent {
     margin: 10px;
     color: white;
+    user-select: text;
 }
 
 .thisUserPic {
@@ -218,4 +220,68 @@ p {
 .messageTime {
     margin: 0;
     margin-top: revert;
+    display: flex;
+    justify-content: center;
+}
+
+.emoji-picker-react{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 56%;
+    left: 65%;
+}
+.close_emoji{
+    position: absolute;
+    left: 164%;
+    top: -6%;
+    z-index: 2;
+    color: red;
+    font-size: 0; 
+    cursor: pointer;
+}
+
+.update{
+    font-size: 38px;
+    cursor: pointer;
+}
+
+.updateButtons{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    padding: 2px;
+}
+
+.updateButtons>span{
+    /* border:1px solid red ; */
+    padding: 1px;
+    margin-bottom:2px ;
+    background-color: #111520;
+    cursor: pointer;
+}
+.closIsUpdate{
+    display: flex;
+    justify-content: flex-end;
+    color: red;
+    padding: 1px;
+  cursor: pointer;
+}
+
+.messUpdateInp{
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+.thisFile {
+    width: 11vh;
+    height: 11vh;
+}
+
+.thisFileVideo{
+    width: 26vh;
+    height: 16vh;
 }

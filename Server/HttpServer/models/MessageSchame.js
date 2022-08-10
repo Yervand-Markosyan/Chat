@@ -14,6 +14,10 @@ const MessageSchame = new mongoose.Schema(
         type:String,
         require: true,
     },
+    type:{
+      type:String,
+      require: true,
+    },
     date:{
         hours:{
             type:String,

@@ -1,7 +1,7 @@
 import React from "react";
-import Fetch from "..//JS/services/fetch";
+import Fetch from "../JS/services/fetch";
 import { Link } from "react-router-dom";
-import "./styles.css/signin.css";
+import "./stylesCSS/signIn.css";
 import { useState } from "react";
 
 const SignIn = () => {

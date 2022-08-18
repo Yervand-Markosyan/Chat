@@ -35,21 +35,21 @@ class MessageControlre {
     try {
       const data = {};
       const userId = req.body.companion_id;
-      const conversId = req.body.conversId;
+      const conversId = req.body.conversId ? req.body.conversId : null;
 
       const aboutUser = await User.find({ _id: userId });
 
-      const lastMess = await MessageSchame.find({
+      const lastMess = conversId ? await MessageSchame.find({
         conversationId: conversId,
         senderId: userId,
-      });
+      }): null
       data._id = aboutUser[0]._id
       data.name = aboutUser[0].name;
       data.lastname = aboutUser[0].lastname;
       data.imgs = aboutUser[0].imgs;
       data.contacts = aboutUser[0].contacts
-      data.lastMessage = lastMess.length > 0 ? lastMess[lastMess.length - 1].message : null;
-      data.lastMessageDate = lastMess.length > 0 ? lastMess[lastMess.length - 1].date.minutes : null;
+      data.lastMessage = lastMess ? lastMess.length > 0 ? lastMess[lastMess.length - 1].message : null: null;
+      data.lastMessageDate = lastMess ?  lastMess.length > 0 ? lastMess[lastMess.length - 1].date.minutes : null: null;
       res.json(data);
     } catch (e) {
       console.log(e);

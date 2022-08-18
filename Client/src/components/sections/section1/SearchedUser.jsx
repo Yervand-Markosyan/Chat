@@ -1,10 +1,10 @@
 import React, { memo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import SOCKET from "../../../JS/soket_Io_client/Socket";
 export default memo(function SearchedUser({ props }) {
   const data = useSelector(data => data.setSearchUsers.searchUsers);
   const conversations = useSelector(state => state.setConversations.conversations)
-  const findUser = data.filter(item => item.user_id == props);
+  const findUser = data.filter(item => item.user_id === props);
   const loggedUser_id = JSON.parse(localStorage.getItem("loggedUser_id"))
   const token = JSON.parse(localStorage.getItem("token")).token
 
@@ -15,7 +15,11 @@ export default memo(function SearchedUser({ props }) {
       item.members[1] !== loggedUser_id && arr.push(item.members[1]);
     })
     if (!arr.includes(findUser[0].user_id)) {
-      SOCKET.socket.emit("newConversation", { user_Id: findUser[0].user_id, loggedUser_id, token, })
+      if (findUser[0].user_id !== loggedUser_id) {
+        SOCKET.socket.emit("newConversation", { user_Id: findUser[0].user_id, loggedUser_id, token, })
+      }else{
+        alert("du qo het inch xosas")
+      }
     } else {
       alert("kapov eq")
     }

@@ -1,12 +1,12 @@
 // libs
-const  bcrypt = require("bcryptjs");
-const  jwt = require("jsonwebtoken");
-const  { validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { validationResult } = require("express-validator");
 // mongodb
 const User = require("../models/user");
-const  Role = require("../models/role");
+const Role = require("../models/role");
 //secret
-const  Secret = require("../secrets/config");
+const Secret = require("../secrets/config");
 
 const generateAccesToken = (email, roles) => {
   const payload = {
@@ -35,7 +35,13 @@ class authControler {
       const user = new User(req.body);
       const token = generateAccesToken(user.email, user.roles);
       const saved = await user.save();
-      return res.json({ token, expiresIn: "240s" , loggedUser_id:saved._id} );
+      return res.json({
+        token: {
+          token,
+          expiresIn: "240s"
+        },
+        loggedUser_id: saved._id
+      });;
     } catch (e) {
       console.log(e);
       res.status(400).json({
@@ -46,18 +52,20 @@ class authControler {
   async signIn(req, res) {
     try {
       const { email, password } = req.body;
-      const user = await User.findOne({ email:email });
+      const user = await User.findOne({ email: email });
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateAccesToken(user.email, user.roles);
-        res.json({ 
-          token:{
+        res.json({
+          token: {
             token,
-             expiresIn: "240s"},
-          loggedUser_id:user._id });
+            expiresIn: "240s"
+          },
+          loggedUser_id: user._id
+        });
       } else {
         return res
           .status(401)
-          .json({ massage: `Acaunt  ${!user.email?email:"pasword"} is not found` });
+          .json({ massage: `Acaunt  ${!user.email ? email : "pasword"} is not found` });
       }
     } catch (e) {
       console.log(e);
@@ -68,10 +76,12 @@ class authControler {
       const reqToken = req.headers.authorization.split(" ")[1];
       const decodeData = jwt.verify(reqToken, Secret.secret);
       const token = generateAccesToken(decodeData.email, decodeData.roles);
-      res.json({ 
-        token:{
-        token,
-         expiresIn: "240s"}, });
+      res.json({
+        token: {
+          token,
+          expiresIn: "240s"
+        },
+      });
       // res.json("")
     } catch (e) {
       console.log(e);
@@ -79,16 +89,16 @@ class authControler {
     }
   }
 
-  async getUserById(req,res){
+  async getUserById(req, res) {
     try {
       const user_id = req.body.loggedUser_id
-      const user = await User.findById(user_id)      
+      const user = await User.findById(user_id)
       const data = {
         fullName: user.name + " " + user.lastname,
         email: user.email,
         gender: user.gender,
         imgs: user.imgs,
-        contacts : user.contacts
+        contacts: user.contacts
       }
       res.json(data)
     } catch (e) {
@@ -96,6 +106,6 @@ class authControler {
       return res.status(404).json({ massage: "user is not found" });
     }
   }
-  }
+}
 
 module.exports = new authControler();

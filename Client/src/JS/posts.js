@@ -39,7 +39,7 @@ const Posts = () => {
       })
 
     // conversations companion users
-    fetch.post('chat/conversation_by_user_id', { loggedUser_id, })
+    fetch.post('chat/conversation_by_user_id', { loggedUser_id })
       .then(data => {
         dispatch({ type: "ADD_CONVERSATIONS", payload: data })
       })
@@ -66,7 +66,7 @@ const Posts = () => {
           window.location.pathname = "/"
         }, 2000);
       })
-  }, [])
+  }, [loggedUser_id])
 
   setInterval(() => {
     refreshToken()

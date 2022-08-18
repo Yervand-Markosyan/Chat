@@ -14,6 +14,7 @@ import groupsReducer from "./reducers/groupsReducer"
 import socketReducer from "./reducers/socketRedducer"
 import sendMessReducer from "./reducers/sendMessReducer"
 import messagesForSection2 from "./reducers/messagesForSection2"
+import videoCallReducer from "./reducers/videoCallReducer"
 
 const rootReducer = combineReducers({
     setSearchUsers: usersReducer,
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
     setCreateGroup: createGroupReducer,
     setAllMessages:messagesForSection2,
     setSendData: sendMessReducer,
-    setSocket:socketReducer
+    setSocket:socketReducer,
+    setCall: videoCallReducer
 })
 
 const store = configureStore({ reducer: rootReducer }, composeWithDevTools)

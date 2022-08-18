@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "./section3.css";
-import pict from "./icons/facebook.svg";
+import { useSelector } from "react-redux";
+import ValidationFiles from "../section2/ValidationFiles";
 
 function Pictures(props) {
-  const [files, setFiles] = useState([pict, pict, pict, pict, pict, pict]);
+  const messages = useSelector(state => state.setAllMessages.allMessages)
+
 
   return (
     <>
       <div className="section3Openedfiles">
-        {files.map(item => {
-            return <img className="section3Openedfile" src={item} alt='/' key={Date.now()} />;
+        {messages.map(item => item.type === "file" &&  item).map(item => {
+            return item?<ValidationFiles props={item.message} key={item._id}/>:null
         })}
       </div>
     </>

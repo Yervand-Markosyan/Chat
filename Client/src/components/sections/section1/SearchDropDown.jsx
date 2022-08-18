@@ -13,7 +13,7 @@ export default function SearchDropDown({ props }) {
         <ul className="dropdown">
           {idMemo.map(item => (
             <li key={item.user_id}>
-              <SearchedUser props={item.user_id} />
+              <SearchedUser props={item.user_id} key={ item.user_id} />
             </li>
           ))}
         </ul>

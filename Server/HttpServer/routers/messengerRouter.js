@@ -12,7 +12,7 @@ const router = new Router();
 router.post("/new_convers/:user1/:user2", MessengerControler.newConversation);
 // get Convers
 router.post("/conversation_by_user_id", authMiddleware, MessengerControler.getConvById);
-router.post("/about_companion", authMiddleware, MessengerControler.aboutConvers);
+router.post("/about_companion",  MessengerControler.aboutConvers);
 
 ///////////////// groups ////////////////////////////
 //// create new group

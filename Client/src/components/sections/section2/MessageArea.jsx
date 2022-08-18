@@ -75,6 +75,7 @@ export default function MessageArea() {
         onClick={() => {
           if (message.length !== 0 && !isFile) {
             SOCKET.socket.emit("sendMessage", data)
+            console.log(12);
             setMessage('')
           } else if (file) {
             upload()

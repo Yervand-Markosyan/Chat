@@ -29,11 +29,11 @@ const usersSchame = new mongoose.Schema({
   contacts:{
     Phone:{
       type:String,
-      default:""
+      default:"+374(98)..."
     },
     email:{
       type:String,
-      default:""
+      default:"defauilt.email.ru"
     },
     socialNetworks:{
       fb:{
@@ -52,6 +52,15 @@ const usersSchame = new mongoose.Schema({
       
     },
     type:Object,
+    default :{
+      Phone:"+374(98)...",
+      email:"{...}.email.ru",
+      socialNetworks:{
+        fb:"FaceBook.com",
+        instagran:"Instagran.com",
+        linkedin:"Linkedin.com",
+      },
+    }
   },
   dateOffline:{
     type: String,

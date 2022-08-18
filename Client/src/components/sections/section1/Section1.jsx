@@ -8,7 +8,6 @@ import CreateGroupPopUp from "./CreateGroupop";
 
 
 function Section1() {
-  const [error, setError] = useState(false);
   const [openChat, setOpenChat] = useState(false);
   const [openGroup, setOpenGroup] = useState(false);
   const [openAll, setOpenAll] = useState(true);
@@ -30,10 +29,6 @@ function Section1() {
     setOpenGroup(false)
     setOpenAll(true)
   };
-
-  if (error) {
-    return "popup error";
-  }
 
   return (
     <>

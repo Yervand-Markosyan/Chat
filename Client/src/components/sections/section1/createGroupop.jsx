@@ -15,7 +15,6 @@ export default function CreateGroupPopUp() {
     const dispatch = useDispatch()
     const isOpen = useSelector(state => state.setCreateGroup.isOpen)
     const creator_id = useSelector(state => state.setCreateGroup.creator_id)
-  const groups = useSelector(state => state.setGroups.groups)
 
     const create = () => {
         if (image && grupName) {
@@ -35,7 +34,7 @@ export default function CreateGroupPopUp() {
                         setImage('')
                         dispatch({ type: "IS_OPEN_POP", payload: false })
                     })
-            }) .catch((error) => {
+            }).catch((error) => {
                     console.error('Error:', error);
                 });
         } else if (grupName) {
@@ -45,7 +44,9 @@ export default function CreateGroupPopUp() {
                     setName('')
                     setImage('')
                     dispatch({ type: "IS_OPEN_POP", payload: false })
-                })
+                }).catch((error) => {
+                    console.error('Error:', error);
+                });
         } else {
             alert("grupai anun gri")
         }

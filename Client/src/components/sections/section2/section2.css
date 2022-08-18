@@ -98,6 +98,10 @@ p {
     height: 1.1em;
     cursor: pointer;
 }
+.collEnd{
+    height: 3em;
+    cursor: pointer;
+}
 
 .messagePlace {
     display: flex;
@@ -284,4 +288,12 @@ p {
 .thisFileVideo{
     width: 26vh;
     height: 16vh;
+}
+
+.messageFile{
+    background-color: #1d2437;
+}
+
+.thisFileAudio{
+    outline: none;
 }

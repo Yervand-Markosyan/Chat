@@ -3,17 +3,37 @@ import { useDispatch, useSelector } from "react-redux";
 import "./section2.css";
 import camera from "..//..//..//..//src/icons/camera.svg";
 import phone from "..//..//..//..//src/icons/phone.svg";
-import Fetch from "..//..//..//JS/services/fetch";
+import endCall from "./icons/endCall.png"
 
 const ChatPartnerHeader = () => {
-  
+
   const dispatch = useDispatch();
   const data = useSelector(state => state.setChangeSection2.changeSection2);
   const online = useSelector(state => state.setChangeSection2.isOnline);
+  const loggedUser_id = JSON.parse(localStorage.getItem("loggedUser_id"))
+  const callData = useSelector(state => state.setCall)
 
   const handlerOpen = () => {
-    dispatch({ type: "CHANGE-SECTION3", payload: true });
+    dispatch({ type: "CHANGE-SECTION3", payload: true })
   };
+
+  const hendelVideoColl = () => {
+    if(online){ 
+    dispatch({type: "SET_START_CALL" ,payload: true }) 
+    dispatch({type: "SET_SETINGS" ,payload: {video:true,audio:true} }) 
+     } else {
+      alert("aper@ online chi cheskara zanges ")
+      }
+  }
+
+  const hendelAudioColl = () => {
+    if(online){ 
+    dispatch({type: "SET_START_CALL" ,payload: true }) 
+    dispatch({type: "SET_SETINGS" ,payload: {video:false,audio:true} }) 
+     } else {
+      alert("aper@ online chi cheskara zanges ")
+      }
+  }
 
   return (
     <div className="header">
@@ -38,10 +58,18 @@ const ChatPartnerHeader = () => {
         </div>
       </div>
 
-      <div className="rightSide">
-        <img alt="/" src={camera} className="camera button"></img>
-        <img alt="/" src={phone} className="phone button"></img>
+      {!callData.callAccepted ? 
+      (<div className="rightSide">
+        <img alt="/" src={camera} className="camera button" onClick={hendelVideoColl}></img>  
+        {/* //callUser(data._id) */}
+        <img alt="/" src={phone} className="phone button" onClick={hendelAudioColl}></img>
       </div>
+      ) : (
+        <div className="rightSide">
+        <img alt="/" src={endCall} className="phone collEnd" onClick={callData.leaveCall}></img>
+      </div>
+      )
+      }
     </div>
   );
 };

@@ -30,23 +30,23 @@ const Search = () => {
     usersNames.map(item => {
       if (
         search.length > 0 &&
-        search.toLowerCase() == item.slice(0, search.length)
+        search.toLowerCase() === item.slice(0, search.length)
       ) {
         console.log(item);
 
         users.map(user => {
-          if (user.fullname.toLowerCase().split(" ")[0] == item) {
+          if (user.fullname.toLowerCase().split(" ")[0] === item) {
             arr.push(user);
           }
         });
       }
     });
     usersLastnames.map(item => {
-      if (search.toLowerCase() == item.slice(0, search.length)) {
+      if (search.toLowerCase() === item.slice(0, search.length)) {
         users.map(user => {
-          if (user.fullname.toLowerCase().split(" ")[1] == item) {
+          if (user.fullname.toLowerCase().split(" ")[1] === item) {
             if (
-              user.fullname[0] !== user.fullname.toLowerCase().split(" ")[1][0]
+              user.fullname[0].toLowerCase() !== user.fullname.toLowerCase().split(" ")[1][0]
             )
               arr.push(user);
           }
@@ -69,7 +69,7 @@ const Search = () => {
           }}
           value={search}
         />
-        {search.length ? <SearchDropDown props={searchUsers} /> : null}
+        {search.length ? <SearchDropDown props={searchUsers}  /> : null}
       </div>
     </>
   );

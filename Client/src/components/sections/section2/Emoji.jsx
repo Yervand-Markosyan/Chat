@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Picker from 'emoji-picker-react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Emoji = (Emoji) => {
-console.log(Emoji);
   const dispatch = useDispatch()
 
   const onEmojiClick = (event, emojiObject) => {

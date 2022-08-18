@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import email from "./icons/email.svg";
 import phone from "./icons/phone.svg";
 import fb from "./icons/facebook.svg";
 import insta from "./icons/instagram.svg";
 import linkedin from "./icons/linkedin.svg";
+import { useSelector } from "react-redux";
 import "./section3.css";
 
 function PersonalinfoOpened() {
-  const [info, setInfo] = useState({});
-
-
+  const userinfo = useSelector(state => state.setChangeSection2.changeSection2);
+ const info = userinfo.contacts
 
   if (!info.socialNetworks) {
     return (

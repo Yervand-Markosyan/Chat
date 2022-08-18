@@ -105,11 +105,12 @@ class SignUp extends React.PureComponent {
                       gender: this.state.gender,
                       imgs: [this.state.img]
                     };
-                    console.log(regInfo)
-                    Fetch.post("auth/signup", regInfo).then(data => {
-                      localStorage.setItem("loggedUser_id",JSON.stringify(data.loggedUser_id))
-                      localStorage.setItem("token",JSON.stringify(data.token))
-                      window.location.href = "http://localhost:3000/chat"
+                    Fetch.post("auth/signup", regInfo)
+                    .then(data => {
+                      console.log(data);
+                      localStorage.setItem("loggedUser_id", JSON.stringify(data.loggedUser_id));
+                      localStorage.setItem("token", JSON.stringify(data.token));
+                      window.location.href = "/chat";
                     });
                     this.setState({
                       name: "",

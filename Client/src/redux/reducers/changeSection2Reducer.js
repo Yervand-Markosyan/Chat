@@ -1,8 +1,7 @@
 const initialState = {
     changeSection2: {},
     isOpen: false,
-    online: false,
-    conversID: 0,
+    isOnline: false,
 }
 
 export default function openSection3Reducer(state = initialState, action) {
@@ -12,20 +11,17 @@ export default function openSection3Reducer(state = initialState, action) {
                 ...state,
                 changeSection2: action.payload,
             }
-            case 'IS_OPEN':
-                return {
-                    isOpen: action.payload,
-                }
-                case 'IS_ONLINE':
-                    return {
-                        ...state,
-                        isOnline: action.payload,
-                    }
-                    case 'CONVERSATION_ID':
-                    return {
-                        conversID: action.payload,
-                    }
-                    default:
-                        return state;
+        case 'IS_OPEN':
+            return {
+                ...state,
+                isOpen: action.payload,
+            }
+        case 'IS_ONLINE':
+            return {
+                ...state,
+                isOnline: action.payload,
+            }
+        default:
+            return state;
     }
 }

@@ -46,7 +46,6 @@ io.on("connection", (socket) => {
 
   //send and get message
   socket.on("sendMessage", async (data) => {
-    console.log(data);
     const messageForMongo = {
       conversationId: data.conversationId,
       senderId: data.senderId,
@@ -70,8 +69,8 @@ io.on("connection", (socket) => {
       .then(response => {
         const message = response.data
         const companion = getUser(data.companionId);
-        companion ? io.to(companion.socketId).emit("getMessage", message) : null
         const sender = getUser(data.senderId)
+        companion ? io.to(companion.socketId).emit("getMessage", message) : null
         io.to(sender.socketId).emit("getMessage", message)
       })
       .catch(e => {
@@ -122,16 +121,36 @@ io.on("connection", (socket) => {
 
 
   //video call
-  socket.on("disconnect", () => {
-    socket.broadcast.emit("callEnded")
+  socket.on("call_end", (data) => {
+      const user1 = getUser(data.loggedUser_id)
+      const user2 = getUser(data.companionId)
+        user1?io.to(user1.socketId).emit("callEnded", true):null
+        user2?io.to(user2.socketId).emit("callEnded", true):null
   })
 
   socket.on("callUser", (data) => {
-    io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name })
+    const user = getUser(data.userToCall)
+    user?io.to(user.socketId).emit("callUser", { signal: data.signalData, from: data.from, name: data.name , event : data.event}):null
+    const token = data.token
+    user?axios.post(`${URL_LOCAL_SERVER}/chat/about_companion`, {companion_id:data.from,conversId:null}, {
+      Headers: {
+        "Content-Type": "aplication/json",
+        "authorization": `Bearer ${token}`
+      }
+    }).then(response=>{
+      user?io.to(user.socketId).emit("about_caller",{data:response.data}):null
+    })
+    .catch(e=>{
+      console.log(data.token);
+    })
+    :
+    null
   })
 
   socket.on("answerCall", (data) => {
-    io.to(data.to).emit("callAccepted", data.signal)
+    const user = getUser(data.to)
+    console.log(123,user);
+    user?io.to(user.socketId).emit("callAccepted", data.signal):null
   })
 
   //when disconnect

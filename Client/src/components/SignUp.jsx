@@ -15,8 +15,8 @@ class SignUp extends React.PureComponent {
       img: "",
       disabled: true,
       avatarImgs: [
-        "http://localhost:3030/chatpx/files/62cf6774f8ecd9a1acf55d7a/noImgMen.PNG",
-        "http://localhost:3030/chatpx/files/62cf6531ae2566236a224b97/noImgWuman.PNG"
+        "https://serverchatpx.herokuapp.com/chatpx/files/62cf6774f8ecd9a1acf55d7a/noImgMen.PNG",
+        "https://serverchatpx.herokuapp.com/chatpx/files/62cf6531ae2566236a224b97/noImgWuman.PNG"
       ]
     };
   }

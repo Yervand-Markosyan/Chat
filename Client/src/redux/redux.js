@@ -15,6 +15,7 @@ import socketReducer from "./reducers/socketRedducer"
 import sendMessReducer from "./reducers/sendMessReducer"
 import messagesForSection2 from "./reducers/messagesForSection2"
 import videoCallReducer from "./reducers/videoCallReducer"
+import headerConfigReducer from "./reducers/headerReducer"
 
 const rootReducer = combineReducers({
     setSearchUsers: usersReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     setAllMessages:messagesForSection2,
     setSendData: sendMessReducer,
     setSocket:socketReducer,
+    setHeaderConfig : headerConfigReducer,
     setCall: videoCallReducer
 })
 

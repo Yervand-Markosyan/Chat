@@ -13,9 +13,28 @@
 }
 
 .aboutStyle {
-    padding: 1vh;
+    padding: 0.5vh;
     margin: 0.5em;
     font-size: 3vh;
+}
+
+.aboutStyle:hover{
+    border: 1px solid rgb(0, 133, 104);
+    border-radius: 0.3em;
+}
+
+.aboutStyle_close{
+    color: rgb(190, 40, 40);
+    padding: 0.5vh;
+    margin: 0.5em;
+    font-size: 3vh;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.aboutStyle_close:hover{
+    border: 1px solid red;
+    border-radius: 0.3em;
 }
 
 .thisPerson {

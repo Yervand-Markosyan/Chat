@@ -2,12 +2,14 @@ import React from "react";
 import "./chatHeader.css";
 import logo from "..//..//..//icons/big-logo.png";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const ChatHeader = () => {
 
   const [dropDown, setDropDown] = useState(false)
   const loggedUser = useSelector(state => state.setLoggedUser.thisUser)
+  const aboutAs = useSelector(state => state.setHeaderConfig.aboutAs)
+  const dispatch = useDispatch()
   const down = "\u2B9F";
   const up = "\u2B9D";
   const showDropDown = () => {
@@ -19,11 +21,21 @@ const ChatHeader = () => {
     }
   };
 
+  const hendlerAboutAs = () => {
+    !aboutAs ? dispatch({type:"SET_ABOUT_AS", payload:true}) : dispatch({type:"SET_ABOUT_AS", payload:false})
+  }
+
   return (
     <div className="Cheader">
       <img className="headerLogo" src={logo} alt="img"/>
       <div className="aboutDev">
-        <div className="aboutStyle">About the creators of chat</div>
+        {
+        !aboutAs?(
+          <div className="aboutStyle" onClick={hendlerAboutAs}>About as</div>
+        ) : (
+          <div className="aboutStyle_close" onClick={hendlerAboutAs}>Close</div>
+        )
+        }
       </div>
       <div className="thisPerson">
         <i className="material-icons">
